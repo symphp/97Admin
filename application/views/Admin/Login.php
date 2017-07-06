@@ -10,7 +10,7 @@
 
 	<!-- CSS -->
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-	<link rel="stylesheet" href="/public//public/assets/bootstrap-3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/public/assets/bootstrap-3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/public/assets/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/public/css/form-elements.css">
 	<link rel="stylesheet" href="/public/css/style.css">
