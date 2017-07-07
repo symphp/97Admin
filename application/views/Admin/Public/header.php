@@ -24,4 +24,7 @@
 
 	<!-- Custom Theme Style -->
 	<link href="/public/assets/build/css/custom.min.css" rel="stylesheet">
+
+    <!-- icon-->
+    <link rel="shortcut icon" href="/public/assets/ico/apple-touch-icon-57-precomposed.png">
 </head>
