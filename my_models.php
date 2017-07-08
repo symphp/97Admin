@@ -9,7 +9,7 @@
  * Where site_model is the model Class
  *
  * ---------------------- Models to Load ----------------------
- * <examples>
+ * <examples>    类名    $this里定义的别名
  *
  * @property membership_model $membership_model
  * @property site_model       $site_model
@@ -18,6 +18,7 @@
  * @property film_model       $film_model
  * @property film_model1      $film_model1
  *
+ * @property Admin_model    $Admin
  *
  *
  */

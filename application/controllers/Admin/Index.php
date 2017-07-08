@@ -12,6 +12,7 @@ class Index extends Admin_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('Admin_model','Admin');
 	}
 
 	public function index()
