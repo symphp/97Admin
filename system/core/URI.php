@@ -107,7 +107,9 @@ class CI_URI {
 			$this->_permitted_uri_chars = $this->config->item('permitted_uri_chars');
 
 			// If it's a CLI request, ignore the configuration
-			if (is_cli())
+			if (defined('PHPUNIT_TEST')) {    //忽略单元测试
+				$uri = '';
+			} else if (is_cli())
 			{
 				$uri = $this->_parse_argv();
 			}
@@ -133,7 +135,6 @@ class CI_URI {
 						break;
 				}
 			}
-
 			$this->_set_uri_string($uri);
 		}
 
