@@ -114,7 +114,7 @@ class MY_Model extends CI_Model
 	 * 更新数据
 	 * @param array $data 数据
 	 * @param array $where 条件
-	 * @return bool
+	 * @return bool|mixed
 	 */
 	public function _update($data = [],$where = [])
 	{
@@ -135,8 +135,8 @@ class MY_Model extends CI_Model
 	/**
 	 * 添加方法（支持批量插入）
 	 * @param array $data
-	 * $param string $return 返回insert结果或者插入id
-	 * @return bool
+	 * @param string $return 返回insert结果或者插入id
+	 * @return bool|mixed
 	 */
 	public function _add($data = [],$return = '')
 	{
@@ -145,7 +145,7 @@ class MY_Model extends CI_Model
 		if(count($data) == count($data, 1)) {
 			$inert_r = $this->db->insert($this->_table,$data);
 			if($return == '') {
-				return $inert_r;
+				return $inert_r??false;
 			} else {
 				return $this->db->insert_id();
 			}
@@ -157,7 +157,7 @@ class MY_Model extends CI_Model
 	/**
 	 * 删除方法
 	 * @param array $where
-	 * @return bool
+	 * @return bool|mixed
 	 */
 	public function _del($where = [])
 	{
@@ -180,7 +180,7 @@ class MY_Model extends CI_Model
 	{
 		$query = $this->db->query($sql);
 		return is_bool($query)?$query:$query->result_array();
-	}
+	}/*-
 
 	/**
 	 * 事物处理
