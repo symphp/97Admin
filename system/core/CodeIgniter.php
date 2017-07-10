@@ -56,7 +56,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  */
 	const CI_VERSION = '3.1.5';
-
 /*
  * ------------------------------------------------------
  *  Load the framework constants
@@ -302,7 +301,6 @@ if ( ! is_php('5.4'))
  * ------------------------------------------------------
  */
 	$URI =& load_class('URI', 'core');
-
 /*
  * ------------------------------------------------------
  *  Instantiate the routing class and set the routing
@@ -356,7 +354,6 @@ if ( ! is_php('5.4'))
  */
 	// Load the base controller class
 	require_once BASEPATH.'core/Controller.php';
-
 	/**
 	 * Reference to the CI_Controller method.
 	 *
@@ -546,7 +543,7 @@ if ( ! is_php('5.4'))
  *  Send the final rendered output to the browser
  * ------------------------------------------------------
  */
-	if ($EXT->call_hook('display_override') === FALSE)
+	if ($EXT->call_hook('display_override') === FALSE  &&  !defined('PHPUNIT_TEST'))
 	{
 		$OUT->_display();
 	}

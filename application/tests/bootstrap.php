@@ -1,8 +1,8 @@
 <?php
 /**
- * @author: chenjia404
- * @Date  : 2016/4/4
- * @Time  : 18:27
+ * @author :symphp
+ * @Date : 2017/7/10
+ * @Time : 11:11
  */
-require_once 'CI_PHPUnit_Framework_TestCase.php';
+require_once "CI_PHPUnit_Framework_TestCase.php";
 require_once dirname(__FILE__) . '/../../index.php';
