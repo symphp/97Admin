@@ -17,7 +17,7 @@ class Index extends Admin_Controller
 
 	public function index()
 	{
-		$this->display('index1');
-//		$this->load->view('Index');
+		$this->display('index');
 	}
+
 }

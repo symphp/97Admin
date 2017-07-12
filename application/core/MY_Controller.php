@@ -36,7 +36,7 @@ class Admin_Controller extends CI_Controller {
 	}
 
 	/**
-	 * 渲染视图
+	 * 渲染后台视图
 	 * @param $view string 视图路径
 	 * @param null $data 数据
 	 */
@@ -45,5 +45,23 @@ class Admin_Controller extends CI_Controller {
 		$data['adminUser'] = $this->adminUser;
 		$layout_data['content'] = $this->load->view($view,$data,true);
 		$this->load->view($this->_layout,$layout_data);
+	}
+
+	/**
+	 * 成功跳转页面
+	 * @param null $data
+	 */
+	public function success($data = null)
+	{
+		$this->load->view('Public/header',$data);
+		$this->load->view('Public/footer');
+		$this->load->view('success');
+	}
+
+	public function error($data = null)
+	{
+		$this->load->view('Public/header',$data);
+		$this->load->view('Public/footer');
+		$this->load->view('error');
 	}
 }

@@ -38,3 +38,6 @@
 
 <!-- Custom Theme Scripts -->
 <script src="/public/assets/build/js/custom.min.js"></script>
+
+<!--nprogress.js error success-->
+<script src="/public/assets/nprogress/nprogress.js"></script>
