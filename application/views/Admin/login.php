@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,18 +22,11 @@
 
 	<!-- Favicon and touch icons -->
 	<link rel="shortcut icon" href="/public/assets/ico/logo_48.png">
-	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/assets/ico/apple-touch-icon-144-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/public/assets/ico/apple-touch-icon-114-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/public/assets/ico/apple-touch-icon-72-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" href="/public/assets/ico/apple-touch-icon-57-precomposed.png">
-
 </head>
 
 <body>
-
 <!-- Top content -->
 <div class="top-content">
-
 	<div class="inner-bg">
 		<div class="container">
 			<div class="row">
@@ -64,36 +55,50 @@
 								<label class="sr-only" for="form-password">Password</label>
 								<input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password">
 							</div>
-                            <div class="form-inline">
+                            <div class="form-group col-xs-8" style="padding-left:0px;">
                                 <label class="sr-only" for="form-verify_code">VerifyCode</label>
-                                <input type="text" class="form-control"  name="verify_code" placeholder="verify_code" id="form-verify_code">
-                                <img src="verify_code" style="float: right"  title="看不清？点击更换另一个验证码。">
+                                <span><input type="text" class="form-control" name="verify_code" placeholder="verify_code" id="form-verify_code"></span>
                             </div>
-                            <div class="form-group" style="margin-top: 2%">
-                                <input type="checkbox" name="remember" id="form-remember">&nbsp;
-                                <label for="form-remember" style="font-weight:normal">Remember me</label>
+                            <div class="col-sm-4">
+                                <img src="/admin/login/verify_code" style="position: absolute;cursor: pointer;" onclick=this.src="/admin/login/verify_code/"+Math.random() title='看不清？点击更换验证码'>
                             </div>
-							<button type="submit" class="btn">Sign in!</button>
+                            <div class="form-group col-xs-6" style="padding-left:0px;">
+                                <label for="form-checkbox" style="margin-top: -10px;font-weight: normal;">Remember me</label>
+                                <input type="checkbox" id="form-checkbox" name="remember" style="float: left" >
+                            </div>
+                            <button type="button" class="btn" onclick="verify()">Sign in!</button>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
 </div>
-
 
 <!-- Javascript -->
 <script src="/public/js/jquery.js?v=1"></script>
 <script src="/public/assets/bootstrap-3.3.7/js/bootstrap.min.js"></script>
 <script src="/public/js/jquery.backstretch.min.js"></script>
 <script src="/public/js/scripts.js?v=1"></script>
+<script src="/public/assets/layer/layer.js"></script>
 
 <!--[if lt IE 10]>
 <script src="/public/js/placeholder.js"></script>
 <![endif]-->
 
+<script>
+        function verify() {
+            if(!$('#form-username').val()) {
+                layer.msg('用户名不能为空！');
+                return false;
+            } else if (!$('#form-password').val()) {
+                layer.msg('请输入密码');
+                return false;
+            } else if (!$('#form-verify_code').val()) {
+                layer.msg('请输入验证码');
+                return false;
+            }
+        }
+</script>
 </body>
-
 </html>
