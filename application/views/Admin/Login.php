@@ -64,9 +64,15 @@
 								<label class="sr-only" for="form-password">Password</label>
 								<input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password">
 							</div>
-							<div class="form-group">
-								<input type="checkbox" name="remember">Remember me
-							</div>
+                            <div class="form-inline">
+                                <label class="sr-only" for="form-verify_code">VerifyCode</label>
+                                <input type="text" class="form-control"  name="verify_code" placeholder="verify_code" id="form-verify_code">
+                                <img src="verify_code" style="float: right"  title="看不清？点击更换另一个验证码。">
+                            </div>
+                            <div class="form-group" style="margin-top: 2%">
+                                <input type="checkbox" name="remember" id="form-remember">&nbsp;
+                                <label for="form-remember" style="font-weight:normal">Remember me</label>
+                            </div>
 							<button type="submit" class="btn">Sign in!</button>
 						</form>
 					</div>
@@ -82,7 +88,7 @@
 <script src="/public/js/jquery.js?v=1"></script>
 <script src="/public/assets/bootstrap-3.3.7/js/bootstrap.min.js"></script>
 <script src="/public/js/jquery.backstretch.min.js"></script>
-<script src="/public/js/scripts.js"></script>
+<script src="/public/js/scripts.js?v=1"></script>
 
 <!--[if lt IE 10]>
 <script src="/public/js/placeholder.js"></script>
