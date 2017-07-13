@@ -88,16 +88,39 @@
 
 <script>
         function verify() {
-            if(!$('#form-username').val()) {
+            var username = $('#form-username').val();
+            var password = $('#form-password').val();
+            var verify_code = $('#form-verify_code').val();
+            var remeber = $('#form-checkbox').is(':checked');
+            if(!username) {
                 layer.msg('用户名不能为空！');
                 return false;
-            } else if (!$('#form-password').val()) {
+            } else if (!password) {
                 layer.msg('请输入密码');
                 return false;
-            } else if (!$('#form-verify_code').val()) {
+            } else if (!verify_code) {
                 layer.msg('请输入验证码');
                 return false;
             }
+            $.ajax({
+                url : '/admin/login/handle_login',
+                type : 'POST',
+                data : {
+                    'username' : username,
+                    'password' : password,
+                    'verify_code' : verify_code,
+                    'remeber' : remeber
+                },
+                success : function (data) {
+                    layer.msg(data.msg,function () {
+                        if (data.url) {
+                            window.location.href = data.url;
+                        } else {
+                            window.location.reload();
+                        }
+                    });
+                }
+            });
         }
 </script>
 </body>

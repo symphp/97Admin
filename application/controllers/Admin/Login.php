@@ -29,4 +29,21 @@ class Login extends Admin_Controller
 		$verify_code = create_captcha($vals);
 		$this->session->set_userdata('verify_code', $verify_code);
 	}
+
+	/**
+	 * 登录处理
+	 */
+	public function handle_login()
+	{
+		$verify_code = $this->input->get('verify_code');
+		if($verify_code && $verify_code == $_SESSION['verify_code']??'') {
+			$username = $this->input->get('username')??'';
+			$password = $this->input->get('password')??'';
+			$remeber  = $this->input->get('remeber')??false;
+		} else {
+			$data['msg'] = '验证码不正确';
+			$data['status'] = 0;
+			$this->ajaxReturn($data);
+		}
+	}
 }
