@@ -103,11 +103,49 @@ class MY_Model extends CI_Model
 			$this->db->having($having);
 		}
 
-		$query = $this->db->get();
-		if($query)
-			return $query->result_array()[0];
-		else
-			return $query;
+		return $this->db->get()->result_array();
+	}
+
+	/**
+	 * 获取单条数据
+	 * @param string $filed
+	 * @param array $where
+	 * @param array $order
+	 * @return bool
+	 */
+	public function _getOne($filed='*',$where=[],$order=[])
+	{
+		if($this->db->conn_id  === false) {
+			return false;
+		}
+		$this->db->select($filed);
+		$this->db->from($this->_table);
+
+		/* where条件 */
+		if (is_array($where) && !empty($where)) {
+			foreach ($where as $key => $value) {
+				if (is_array($value)) {
+					$this->db->where_in($key, $value);
+				} else {
+					$this->db->where($key,$value);
+				}
+			}
+		}
+
+		/* order条件 */
+		if (is_array($order) && !empty($order)) {
+			foreach ($order as $key => $value) {
+				$this->db->order_by($key,$value);
+			}
+		}
+
+		$query = $this->db->get()->result_array();
+
+		if($query) {
+			return $query[0];
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -180,7 +218,7 @@ class MY_Model extends CI_Model
 	{
 		$query = $this->db->query($sql);
 		return is_bool($query)?$query:$query->result_array();
-	}/*-
+	}
 
 	/**
 	 * 事物处理

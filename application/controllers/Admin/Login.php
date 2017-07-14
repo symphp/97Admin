@@ -12,6 +12,7 @@ class Login extends Admin_Controller
 	{
 		parent::__construct();
 		$this->load->helper('captcha');
+		$this->load->model('Admin_model','Admin');
 	}
 
 	public function index()
@@ -22,28 +23,52 @@ class Login extends Admin_Controller
 	/**
 	 * 生成验证码并保存到session
 	 */
-	public function verify_code()
+	public function verifyCode()
 	{
 		//调用函数生成验证码
 		$vals = array('img_width' => '100', 'img_height' => '48', 'word_length' => 4);
 		$verify_code = create_captcha($vals);
-		$this->session->set_userdata('verify_code', $verify_code);
+		$this->session->set_userdata('verify_code', strtolower($verify_code));
 	}
 
 	/**
 	 * 登录处理
 	 */
-	public function handle_login()
+	public function handleLogin()
 	{
-		$verify_code = $this->input->get('verify_code');
-		if($verify_code && $verify_code == $_SESSION['verify_code']??'') {
-			$username = $this->input->get('username')??'';
-			$password = $this->input->get('password')??'';
-			$remeber  = $this->input->get('remeber')??false;
+		$verify_code = $this->input->post('verify_code');
+		if($verify_code && strtolower($verify_code) == $_SESSION['verify_code']??'') {
+			$username = $this->input->post('username')??'';
+			$password = $this->input->post('password')??'';
+			$remeber  = $this->input->post('remeber')??false;
+			$admin_info = $this->Admin->checkUser($username,$password);
+			if($admin_info) {
+				$token = md5($admin_info['username'].uniqid());    //登录认证
+				$this->Admin->_update(['id'=>$admin_info['id'],['token'=>$token]]);    //存入token认证
+				if($remeber) {
+					$this->session->set_userdata('token', $token);
+				} else {
+					$this->session->set_userdata('token', $token);
+				}
+				$data['msg'] = '登录成功';
+				$data['url'] = '/admin/login/index';
+				$this->success($data);
+			} else {
+				$data['msg'] = '用户名或密码不正确';
+				$data['status'] = 0;
+			}
 		} else {
 			$data['msg'] = '验证码不正确';
 			$data['status'] = 0;
-			$this->ajaxReturn($data);
+			ajaxReturn($data);
 		}
 	}
+
+	public function password()
+	{
+		$intermediateSalt = md5(uniqid(rand(), true));
+		$salt = substr($intermediateSalt, 0, 6);
+		echo hash("sha256", 'admin' . $salt);
+	}
+
 }
