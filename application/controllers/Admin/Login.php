@@ -44,7 +44,7 @@ class Login extends Admin_Controller
 			$admin_info = $this->Admin->checkUser($username,$password);
 			if($admin_info) {
 				$token = md5($admin_info['username'].uniqid());    //登录认证
-				$this->Admin->_update(['id'=>$admin_info['id'],['token'=>$token]]);    //存入token认证
+				$update_res = $this->Admin->_update(['token'=>$token],['id'=>$admin_info['id']]);    //存入token认证
 				if($remeber) {
 					$this->session->set_userdata('token', $token);
 				} else {
@@ -52,10 +52,13 @@ class Login extends Admin_Controller
 				}
 				$data['msg'] = '登录成功';
 				$data['url'] = '/admin/login/index';
-				$this->success($data);
+				$data['status'] = 1;
+				$this->add_log($data['msg'],$admin_info['id']);    //添加操作日志
+				ajaxReturn($data);
 			} else {
 				$data['msg'] = '用户名或密码不正确';
 				$data['status'] = 0;
+				ajaxReturn($data);
 			}
 		} else {
 			$data['msg'] = '验证码不正确';

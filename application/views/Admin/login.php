@@ -112,9 +112,11 @@
                     'remeber' : remeber
                 },
                 success : function (data) {
-                    layer.msg(data.msg,function () {
-                        if (data.url) {
+                    layer.msg(data.msg,{time:1000},function () {
+                        if (data.status == 1) {
                             window.location.href = data.url;
+                        } else {
+                            window.location.reload();
                         }
                     });
                 }

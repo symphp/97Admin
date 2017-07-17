@@ -68,4 +68,16 @@ class Admin_Controller extends CI_Controller {
 		$this->load->view('Public/footer');
 		$this->load->view('error');
 	}
+
+	/**
+	 * 添加操作日志
+	 * @param $log string 操作说明
+	 * @param string $admin_id
+	 * @return mixed
+	 */
+	protected function add_log($log,$admin_id = '')
+	{
+		$this->load->model('AdminLog_model','AdminLog');
+		return $this->AdminLog->add($log,$admin_id);
+	}
 }

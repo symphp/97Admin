@@ -19,6 +19,7 @@
  * @property film_model1      $film_model1
  *
  * @property Admin_model    $Admin
+ * @property AdminLog_model $AdminLog
  *
  *
  */
