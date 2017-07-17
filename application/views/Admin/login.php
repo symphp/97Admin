@@ -115,8 +115,6 @@
                     layer.msg(data.msg,function () {
                         if (data.url) {
                             window.location.href = data.url;
-                        } else {
-                            window.location.reload();
                         }
                     });
                 }

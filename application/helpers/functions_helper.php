@@ -39,19 +39,18 @@ if (!function_exists('ajaxReturn'))
 	}
 }
 
-if(!function_exists('encryptPass'))
+if(!function_exists('hashPass'))
 {
 	/**
-	 * Password Hashing API
+	 * hash password加密
 	 * @param $password string 未加密的密码
 	 * @param string $salt string 盐
-	 * @param string $way string 加密方式 PASSWORD_DEFAULT 超过60个字符长度，PASSWORD_BCRYPT 总长度为60
-	 * @param int $const int 消耗值 越大算法越复杂
+	 * @param $mode string $mode sha256, sha512, md5, sha1等加密方式
 	 * @return bool|mixed|string
 	 * @todo 常用的几种密码加密算法 http://www.cnblogs.com/sunbjj/p/6139724.html
 	 */
-	function encryptPass($password,$salt = '',$way = 'PASSWORD_DEFAULT',$const = 12)
+	function hashPass($password,$salt = '',$mode = 'sha256')
 	{
-		return password_hash($password,PASSWORD_DEFAULT,['salt' => $way,'const' => $const]);
+		return hash($mode,$password.$salt);
 	}
 }

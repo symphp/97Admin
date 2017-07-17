@@ -23,7 +23,7 @@ class Admin_model extends MY_Model
 		if(!$user_info) {
 			return false;
 		}
-		if(encryptPass($password,$user_info['salt']) != $user_info['password']){    //判断密码是否正确
+		if(hashPass($password,$user_info['salt']??'') != $user_info['password']){    //判断密码是否正确
 			return false;
 		}
 		return $user_info;
