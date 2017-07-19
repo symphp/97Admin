@@ -60,7 +60,7 @@
                                 <span><input type="text" class="form-control" name="verify_code" placeholder="verify_code" id="form-verify_code"></span>
                             </div>
                             <div class="col-sm-4">
-                                <img src="/admin/login/verifyCode" style="position: absolute;cursor: pointer;" onclick=this.src="/admin/login/verifyCode/"+Math.random() title='看不清？点击更换验证码'>
+                                <img src="/Admin/Login/verifyCode" style="position: absolute;cursor: pointer;" onclick=this.src="/Admin/Login/verifyCode"+Math.random() title='看不清？点击更换验证码'>
                             </div>
                             <div class="form-group col-xs-6" style="padding-left:0px;">
                                 <label for="form-checkbox" style="margin-top: -10px;font-weight: normal;">Remember me</label>

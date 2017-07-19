@@ -29,12 +29,18 @@ class Admin_model extends MY_Model
 		return $user_info;
 	}
 
-	public function getAdminAuth(int $admin_id)
+	/**
+	 * 获取角色权限
+	 * @param int $admin_id
+	 * @param array $where
+	 * @return bool|mixed
+	 */
+	public function getAdminAuth(int $admin_id,$where = [])
 	{
 		if(!$admin_id) {
 			return false;
 		} else {
-			$filed = 'auth.*,ar.role_id,ar.*';
+			$filed = 'admin.username,auth.*,ar.role_id,ar.*';
 
 			$where['admin.id']  = $admin_id;
 			$where['ar.status'] = 1;

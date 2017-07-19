@@ -68,7 +68,7 @@ class Login extends Admin_Controller
 	}
 
 	/**
-	 * 权限错误时
+	 * 无权限页面
 	 */
 	public function authError()
 	{

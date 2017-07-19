@@ -38,7 +38,7 @@ class Admin_Controller extends CI_Controller {
 		$flag = false;
 
 		/** -------------- 验证用户是否登录，获取登录用户信息 ---------------- **/
-		$token = $this->input->cookie('token');
+		$token = $this->session->userdata('token');
 		if($this->router->fetch_class() == 'Login') {
 			return false;
 		}
@@ -55,14 +55,22 @@ class Admin_Controller extends CI_Controller {
 			header("Location: /Admin/Login/");
 			exit();
 		}
-
 		/** ---------------- 判断操作是否有权限，获取权限列表 ----------------**/
-		$admin_auth_arr = $this->Admin->getAdminAuth($this->adminUser['id']);
+		$auth_name = ucfirst($this->router->fetch_class().'/'.$this->router->fetch_method());
+		$checkAuthNaME = $this->Admin->getAdminAuth($this->adminUser['id'],['auth.name'=>$auth_name]);
+		if($checkAuth_res == false) {
+			header("Location: /Admin/Login/authError");
+			exit();
+		}
+		$admin_auth_arr = $this->Admin->getAdminAuth($this->adminUser['id']);    //获取角色权限
 
-		$controller = $this->router->fetch_class();    //获取当前控制器
-		$action     = $this->router->fetch_method();    //获取当前方法
+		foreach ($admin_auth_arr as $key => $admin_auth) {
+			if($admin_auth['role_id'] == 1) {    //超级管理员
+				return false;
+			} else {
 
-		exit(var_dump($admin_auth_arr));
+			}
+		}
 	}
 
 	/**
