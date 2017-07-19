@@ -51,7 +51,7 @@ class Login extends Admin_Controller
 					$this->session->set_userdata('token', $token);
 				}
 				$data['msg'] = '登录成功';
-				$data['url'] = '/admin/login/index';
+				$data['url'] = '/Admin/Index/index';
 				$data['status'] = 1;
 				$this->add_log($data['msg'],$admin_info['id']);    //添加操作日志
 				ajaxReturn($data);
@@ -67,11 +67,14 @@ class Login extends Admin_Controller
 		}
 	}
 
-	public function password()
+	/**
+	 * 权限错误时
+	 */
+	public function authError()
 	{
-		$intermediateSalt = md5(uniqid(rand(), true));
-		$salt = substr($intermediateSalt, 0, 6);
-		echo hash("sha256", 'admin' . $salt);
+		$error['msg'] = '您没有权限访问该页面！';
+		$error['url'] = '/Admin/Login/';
+		$this->error($error);
 	}
 
 }

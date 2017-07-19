@@ -32,7 +32,37 @@ class Admin_Controller extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+
 		$this->load->set_ci_view_dir(ADMIN_VIEW_DIR);    //设置后台视图路径
+
+		$flag = false;
+
+		/** -------------- 验证用户是否登录，获取登录用户信息 ---------------- **/
+		$token = $this->input->cookie('token');
+		if($this->router->fetch_class() == 'Login') {
+			return false;
+		}
+		if($token) {
+			$admin  = $this->Admin->_getOne('*',['token'=>$token,'status'=>1]);
+			if($admin) {
+				$flag = true;
+				$admin['head_pic'] = json_decode($admin['head_pic']);
+				$this->adminUser = $admin;    //保存用户信息
+			}
+		}
+
+		if($flag == false){
+			header("Location: /Admin/Login/");
+			exit();
+		}
+
+		/** ---------------- 判断操作是否有权限，获取权限列表 ----------------**/
+		$admin_auth_arr = $this->Admin->getAdminAuth($this->adminUser['id']);
+
+		$controller = $this->router->fetch_class();    //获取当前控制器
+		$action     = $this->router->fetch_method();    //获取当前方法
+
+		exit(var_dump($admin_auth_arr));
 	}
 
 	/**
@@ -49,10 +79,11 @@ class Admin_Controller extends CI_Controller {
 
 	/**
 	 * 成功跳转页面
-	 * @param null $data
+	 * @param null $success
 	 */
-	protected function success($data = null)
+	protected function success($success = null)
 	{
+		$data['success'] = $success;
 		$this->load->view('Public/header',$data);
 		$this->load->view('Public/footer');
 		$this->load->view('success');
@@ -60,10 +91,11 @@ class Admin_Controller extends CI_Controller {
 
 	/**
 	 * 错误跳转页面
-	 * @param null $data
+	 * @param null $error
 	 */
-	protected function error($data = null)
+	protected function error($error = null)
 	{
+		$data['error'] = $error;
 		$this->load->view('Public/header',$data);
 		$this->load->view('Public/footer');
 		$this->load->view('error');

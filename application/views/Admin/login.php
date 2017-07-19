@@ -103,7 +103,7 @@
                 return false;
             }
             $.ajax({
-                url : '/admin/login/handleLogin',
+                url : '/Admin/Login/handleLogin',
                 type : 'POST',
                 data : {
                     'username' : username,
