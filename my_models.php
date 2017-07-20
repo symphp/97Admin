@@ -20,6 +20,7 @@
  *
  * @property Admin_model    $Admin
  * @property AdminLog_model $AdminLog
+ * @property Auth_model $Auth
  *
  *
  */
