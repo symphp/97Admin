@@ -10,6 +10,6 @@ class Menu extends Admin_Controller
 {
 	public function add()
 	{
-			
+		$this->display('/Menu/add');
 	}
 }
