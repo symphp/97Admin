@@ -5,14 +5,9 @@
 <body class="nav-md">
 <div class="container body">
 	<div class="main_container">
-		<div class="col-md-3 left_col">
+		<div class="col-md-3 left_col" style="margin-top: 60px;">
 			<div class="left_col scroll-view">
-				<div class="navbar nav_title" style="border: 0;">
-					<a href="index.html" class="site_title"><i class="fa fa-home"></i> <span>97Admin</span></a>
-				</div>
-
 				<div class="clearfix"></div>
-
 				<!-- menu profile quick info -->
 				<div class="profile clearfix">
 					<div class="profile_pic">
@@ -51,101 +46,116 @@
 		</div>
 
 		<!-- top navigation -->
-		<div class="top_nav">
-			<div class="nav_menu">
-				<nav>
-					<div class="nav toggle">
-						<a id="menu_toggle"><i class="fa fa-bars"></i></a>
-					</div>
+        <div class="nav_menu" style="background: #72d0eb">
+            <nav>
+                <div class="nav toggle">
+                    <a id="menu_toggle"><i class="fa fa-bars" style="color: #FFF"></i></a>
+                </div>
+                <div style="float: left;padding-top: 11px;font-size:24px;">
+                    <a href="" style="color: #FFF;margin-left:-15px;">97Admin</a>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="">
+                        <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <img src="/public/img/touxiang.jpg" alt="">
+                            admin								<span class=" fa fa-angle-down"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-usermenu pull-right">
+                            <li>
+                                <a href="javascript:;">
+                                    <span>设置</span>
+                                </a>
+                            </li>
+                            <li><a href="javascript:;">Help</a></li>
+                            <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> 退出</a></li>
+                        </ul>
+                    </li>
 
-					<ul class="nav navbar-nav navbar-right">
-						<li class="">
-							<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-								<img src="/public/img/touxiang.jpg" alt="">
-                                <?=$admin['username']??''?>
-								<span class=" fa fa-angle-down"></span>
-							</a>
-							<ul class="dropdown-menu dropdown-usermenu pull-right">
-								<li>
-									<a href="javascript:;">
-										<span>设置</span>
-									</a>
-								</li>
-								<li><a href="javascript:;">Help</a></li>
-								<li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> 退出</a></li>
-							</ul>
-						</li>
-
-						<li role="presentation" class="dropdown">
-							<ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-								<li>
-									<a>
-										<span class="image"><img src="/Public/img/touxiang.jpg" alt="Profile Image" /></span>
-										<span>
+                    <li role="presentation" class="dropdown">
+                        <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                            <li>
+                                <a>
+                                    <span class="image"><img src="/Public/img/touxiang.jpg" alt="Profile Image"></span>
+                                    <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
                         </span>
-										<span class="message">
+                                    <span class="message">
                           Film festivals used to be do-or-die moments for movie makers. They were where...
                         </span>
-									</a>
-								</li>
-								<li>
-									<a>
-										<span class="image"><img src="/Public/img/touxiang.jpg" alt="Profile Image" /></span>
-										<span>
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <span class="image"><img src="/Public/img/touxiang.jpg" alt="Profile Image"></span>
+                                    <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
                         </span>
-										<span class="message">
+                                    <span class="message">
                           Film festivals used to be do-or-die moments for movie makers. They were where...
                         </span>
-									</a>
-								</li>
-								<li>
-									<a>
-										<span class="image"><img src="/Public/img/touxiang.jpg" alt="Profile Image" /></span>
-										<span>
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <span class="image"><img src="/Public/img/touxiang.jpg" alt="Profile Image"></span>
+                                    <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
                         </span>
-										<span class="message">
+                                    <span class="message">
                           Film festivals used to be do-or-die moments for movie makers. They were where...
                         </span>
-									</a>
-								</li>
-								<li>
-									<a>
-										<span class="image"><img src="/Public/img/touxiang.jpg" alt="Profile Image" /></span>
-										<span>
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <span class="image"><img src="/Public/img/touxiang.jpg" alt="Profile Image"></span>
+                                    <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
                         </span>
-										<span class="message">
+                                    <span class="message">
                           Film festivals used to be do-or-die moments for movie makers. They were where...
                         </span>
-									</a>
-								</li>
-								<li>
-									<div class="text-center">
-										<a>
-											<strong>See All Alerts</strong>
-											<i class="fa fa-angle-right"></i>
-										</a>
-									</div>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</div>
+                                </a>
+                            </li>
+                            <li>
+                                <div class="text-center">
+                                    <a>
+                                        <strong>See All Alerts</strong>
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
 		<!-- /top navigation -->
-
 		<!-- page content -->
-
-		<?= $content??'';?>
-
+        <div class="right_col" role="main">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="breadcrumb" style="background-color:#c9cccf;margin-bottom:10px;border-radius:6px;">
+                            <li>
+                                <a href="/Admin/Index/"><i class="fa fa-home"></i>首页</a>
+                            </li>
+                            <?php if(!empty($current)) :?>
+                                <li>»</li>
+                                <li>
+                                    <a href="#"><?=$current['ptitle']?></a>
+                                </li>
+                                <li>»</li>
+                                <li class="active"><?=$current['title']?></li>
+                            <?php endif;?>
+                        </ul>
+                    </div>
+                </div>
+			<?= $content??'';?>
+        </div>
 		<!-- footer content -->
 		<footer>
 			<div class="pull-right">
