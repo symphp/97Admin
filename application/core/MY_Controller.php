@@ -138,10 +138,10 @@ class Admin_Controller extends CI_Controller {
 			$tmpMap[$item[$id]] = $item;
 		}
 
-		foreach($items as $item){
-			if(isset($tmpMap[$item[$pid]])){
+		foreach ($items as $item) {
+			if (isset($tmpMap[$item[$pid]])) {
 				$tmpMap[$item[$pid]][$son][] = &$tmpMap[$item[$id]];
-			}else{
+			} else {
 				$tree[] = &$tmpMap[$item[$id]];
 			}
 		}
