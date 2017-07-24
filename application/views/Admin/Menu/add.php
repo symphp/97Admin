@@ -25,7 +25,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_content">
-                <form class="form-horizontal form-label-left" method="post" id="autoForm">
+                <form class="form-horizontal form-label-left" action="add" method="post" id="autoForm">
                     <span class="section">添加菜单</span>
                     <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">菜单名称 <span class="required">*</span></label>
@@ -36,12 +36,20 @@
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">上级菜单<span class="required">*</span></label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <select class="form-control" data-parsley-id="7">
-                                    <option>Choose option</option>
-                                    <option>Option one</option>
-                                    <option>Option two</option>
-                                    <option>Option three</option>
-                                    <option>Option four</option>
+                                <select class="form-control">
+                                    <option value="0">顶级分类</option>
+                                    <?php if(!empty($menus)) :?>
+                                        <?php foreach ($menus as $menu) :?>
+                                            <option value="<?= $menu['auth_id'];?>"><?= $menu['title']??'';?></option>
+                                            <?php if($menu['children']) :?>
+                                                <?php foreach ($menu['children'] as $child) :?>
+                                                        <option value="<?php echo $child['auth_id'];?>">&nbsp;&nbsp;&nbsp;┗━
+                                                            <?= $child['title'];?>
+                                                        </option>
+                                                <?php endforeach;?>
+                                            <?php endif;?>
+										<?php endforeach;?>
+                                    <?php endif;?>
                                 </select>
                             </div>
                     </div>

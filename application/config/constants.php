@@ -88,3 +88,5 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 define('HOME_VIEW_DIR', 'views/Home/');
 //定义后台视图路径常量
 define('ADMIN_VIEW_DIR', 'views/Admin/');
+//IS_POST
+define("IS_POST", strtolower($_SERVER['REQUEST_METHOD']) == 'post');
