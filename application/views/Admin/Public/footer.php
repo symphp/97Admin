@@ -1,5 +1,3 @@
-<!-- jQuery -->
-<script src="/public/assets/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="/public/assets/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- FastClick -->
@@ -40,4 +38,6 @@
 <script src="/public/assets/build/js/custom.min.js"></script>
 
 <!--nprogress.js error success-->
-<script src="/public/assets/nprogress/nprogress.js"></script>
+<!--<script src="/public/assets/nprogress/nprogress.js"></script>-->
+
+

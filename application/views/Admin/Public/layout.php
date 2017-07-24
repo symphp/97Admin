@@ -144,10 +144,12 @@
                                 <a href="/Admin/Index/"><i class="fa fa-home"></i>首页</a>
                             </li>
                             <?php if(!empty($current)) :?>
-                                <li>»</li>
-                                <li>
-                                    <a href="#"><?=$current['ptitle']?></a>
-                                </li>
+                                <?php if($current['ptitle']) :?>
+                                    <li>»</li>
+                                    <li>
+                                        <a href="#"><?=$current['ptitle']?></a>
+                                    </li>
+								<?php endif;?>
                                 <li>»</li>
                                 <li class="active"><?=$current['title']?></li>
                             <?php endif;?>
