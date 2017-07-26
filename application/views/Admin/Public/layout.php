@@ -29,11 +29,11 @@
                                     <li <?php if($menu['auth_id'] == 1) {echo "style='border-right:0px solid #1ABB9C'";} ?>>
                                         <a <?php if($menu['auth_id'] == 1) {echo "href='/admin/index'";} ?>><i class="<?=$menu['icon']??''?>"></i> <?=$menu['title']??''?> <span class="<?=$menu['icon']??''?>"></span></a>
 										<?php if(isset($menu['children'])) :?>
-											<?php foreach ($menu['children'] as $child) :?>
-                                                <ul class="nav child_menu">
-                                                    <li><a href="/Admin/<?=$child['name']??''?>"><?=$child['title']??''?></a></li>
-                                                </ul>
-											<?php endforeach;?>
+                                            <ul class="nav child_menu">
+                                                <?php foreach ($menu['children'] as $child) :?>
+                                                        <li><a href="/Admin/<?=$child['name']??''?>"><?=$child['title']??''?></a></li>
+                                                <?php endforeach;?>
+                                            </ul>
 										<?php endif;?>
                                     </li>
                                 <?php endforeach;?>
@@ -138,7 +138,7 @@
 		<!-- page content -->
         <div class="right_col" role="main">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
                         <ul class="breadcrumb" style="background-color:#c9cccf;margin-bottom:10px;border-radius:6px;">
                             <li>
                                 <a href="/Admin/Index/"><i class="fa fa-home"></i>首页</a>
@@ -147,7 +147,7 @@
                                 <?php if($current['ptitle']) :?>
                                     <li>»</li>
                                     <li>
-                                        <a href="#"><?=$current['ptitle']?></a>
+                                        <a href="/Admin/<?= $current['pname']??'';?>"><?=$current['ptitle']?></a>
                                     </li>
 								<?php endif;?>
                                 <li>»</li>

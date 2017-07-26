@@ -17,7 +17,7 @@ class Auth_model extends MY_Model
 	 */
 	public function get_current_auth(int $auth_id)
 	{
-		$sql = "SELECT s.*,p.pid as ppid,p.title as ptitle
+		$sql = "SELECT s.*,p.pid as ppid,p.title as ptitle,p.name as pname
 				FROM auth s 
 				LEFT JOIN auth p on p.auth_id=s.pid
 				where s.auth_id=$auth_id";

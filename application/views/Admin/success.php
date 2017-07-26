@@ -9,7 +9,7 @@
 					<h3 style="color: white;"><?= $success['msg']??'操作成功'?></h3>
                     <div style="font-size: 1.3em;">
                         <span>页面自动</span>
-                        <a href="<?= $success['url']??'';?>" style="color: white;">跳转</a>
+                        <a href="<?= $success['url']??$_SERVER['HTTP_REFERER'];?>" style="color: white;">跳转</a>
                         <span>等待时间：</span>
                         <span class="second" style="color: white"><?= $success['wait']??3;?></span>
                     </div>
@@ -33,7 +33,7 @@
                         timeOut();
                     }, 1000);
                 } else {
-                    window.location.href = "<?= $success['url']??'';?>";
+                    window.location.href = "<?= $success['url']??$_SERVER['HTTP_REFERER'];?>";
                 }
             }
         });

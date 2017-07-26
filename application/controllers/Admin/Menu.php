@@ -11,7 +11,12 @@ class Menu extends Admin_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Auth_model','Auth');
+	}
+
+	public function index()
+	{
+		$data['menus'] = $this->get_all_menu($this->admin['id']);    //获取树状菜单列表
+		$this->display('/Menu/index',$data);
 	}
 
 	/**
@@ -36,10 +41,48 @@ class Menu extends Admin_Controller
 				$this->success($success);
 			}
  		} else {
-			$menus = $this->Auth->_get('*',['status'=>1]);
-			$data['menus'] = $this->get_menu_tree($menus);    //获取树状菜单列表
+			$data['menus'] = $this->get_all_menu($this->admin['id']);    //获取树状菜单列表
 			$this->display('/Menu/add',$data);
 		}
 	}
+
+	/**
+	 * 编辑菜单
+	 */
+	public function edit()
+	{
+		if(IS_POST) {
+
+		} else {
+			$id = $this->input->get('id')??false;
+			if(!$id) {
+				$error['msg'] = '参数不正确，请稍后再试！';
+				$this->error($error);
+			}
+			$data['menus'] = $this->get_all_menu($this->admin['id']);    //获取树状菜单列表
+			$auth = $this->Admin->getAdminAuth($this->admin['id'],['auth.auth_id'=>$id]);    //获取当前菜单
+			if($auth) {
+				$data['auth'] = $auth[0];
+				$this->display('/Menu/edit',$data);
+			} else {
+				$error['msg'] = '当前菜单不正确，请稍后再试！';
+				$this->error($error);
+			}
+		}
+	}
+
+	/**
+	 * @param $id int 管理员id
+	 * @return mixed
+	 */
+	public function get_all_menu($id)
+	{
+		if(!is_int($id)) {
+			return false;
+		}
+		$menus = $this->Admin->getAdminAuth($id);    //获取菜单权限列表
+		return $this->get_menu_tree($menus);
+	}
+
 
 }

@@ -9,7 +9,7 @@
 					<h3 style="color: white;"><?= $error['msg']??'操作错误'?></h3>
                     <div style="font-size: 1.3em;">
                         <span>页面自动</span>
-                        <a href="<?= $error['url']??'';?>" style="color: white;">跳转</a>
+                        <a href="<?= $error['url']??'/admin/index/index';?>" style="color: white;">跳转</a>
                         <span>等待时间：</span>
                         <span class="second" style="color: white"><?= $error['wait']??3;?></span>
                     </div>
@@ -33,7 +33,7 @@
                         timeOut();
                     }, 1000);
                 } else {
-                    window.location.href = "<?= $error['url']??'';?>";
+                    window.location.href = "<?= $error['url']??'/admin/index/index';?>";
                 }
             }
         });
