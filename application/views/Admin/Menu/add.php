@@ -36,7 +36,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">上级菜单<span class="required">*</span></label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <select class="form-control">
+                                <select class="form-control" name="pid">
                                     <option value="0">顶级分类</option>
                                     <?php if(!empty($menus)) :?>
                                         <?php foreach ($menus as $menu) :?>

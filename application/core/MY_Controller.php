@@ -57,7 +57,6 @@ class Admin_Controller extends CI_Controller {
 		}
 		/** ---------------- 判断操作是否有权限，获取权限列表 ----------------**/
 		$auth_name = ucfirst($this->router->fetch_class().'/'.$this->router->fetch_method());    //当前操作与方法
-
 		$checkAuthName = $this->Admin->getAdminAuth($this->admin['id'],['auth.name'=>$auth_name]);    //判断当前操作是否有权限
 		if($checkAuthName == false) {
 			header("Location: /Admin/Login/authError");

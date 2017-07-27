@@ -147,17 +147,33 @@
                                 <?php if($current['ptitle']) :?>
                                     <li>»</li>
                                     <li>
-                                        <a href="/Admin/<?= $current['pname']??'';?>"><?=$current['ptitle']?></a>
+                                        <a href="<?php if(empty($current['pname']))
+                                            {echo 'javascript:void(0);';}
+                                        else
+                                            {echo "/Admin/{$current['pname']}";}
+                                            ;?>">
+                                            <?=$current['ptitle']?>
+                                            "
+                                        </a>
                                     </li>
 								<?php endif;?>
                                 <li>»</li>
                                 <li class="active"><?=$current['title']?></li>
                             <?php endif;?>
                         </ul>
+                        <?php if(!empty($current['explain'])) :?>
+                            <div class="alert alert-success alert-dismissible fade in" style="background-color:#dff0d8;color:#3c763d;border: 0px solid transparent;margin-bottom:15px;" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                                <span style="color: #3c763d"><?= $current['explain']??'';?></span>
+                            </div>
+						<?php endif;?>
                     </div>
                 </div>
 			<?= $content??'';?>
         </div>
+
 		<!-- footer content -->
 		<footer>
 			<div class="pull-right">

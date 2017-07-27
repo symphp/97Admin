@@ -25,7 +25,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_content">
-                <form class="form-horizontal form-label-left" action="add" method="post" id="autoForm">
+                <form class="form-horizontal form-label-left" action="edit" method="post" id="autoForm">
                     <span class="section">编辑菜单</span>
                     <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">菜单名称 <span class="required">*</span></label>
@@ -36,7 +36,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">上级菜单<span class="required">*</span></label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <select class="form-control">
+                                <select class="form-control" name="pid">
                                     <option value="0" <?php if($auth['pid'] == 0) {echo 'selected="selected"';} ?>>顶级分类</option>
                                     <?php if(!empty($menus)) :?>
                                         <?php foreach ($menus as $menu) :?>
@@ -88,6 +88,7 @@
                     </div>
                     <div class="item form-group">
                         <div class="col-md-6 col-md-offset-3">
+                            <input type="hidden" name="id" value="<?=$_GET['id']??''?>">
                             <button id="send" type='submit' class="btn btn-success">编辑</button>
                         </div>
                     </div>

@@ -28,5 +28,6 @@
     <link rel="shortcut icon" href="/public/assets/ico/apple-touch-icon-57-precomposed.png">
     <!-- jquery -->
     <script src="/public/assets/jquery/dist/jquery.min.js"></script>
-
+    <!-- jquery -->
+    <script src="/public/assets/layer/layer.js"></script>
 </head>

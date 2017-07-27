@@ -18,6 +18,7 @@
 					<th>菜单名称</th>
 					<th>Controller/Function</th>
 					<th>排序</th>
+                    <th>提示</th>
 					<th>操作</th>
 				</tr>
 				</thead>
@@ -29,6 +30,7 @@
 									<td><?=$menu['title'];?></td>
 									<td><?=$menu['name'];?></td>
 									<td><?=$menu['sort'];?></td>
+                                    <td><?= $menu['auth_explain']??'';?></td>
 									<td>
 										<a href="edit?id=<?= $menu['auth_id'];?>" class="btn btn-primary btn-xs" title="修改">
 											<li class="fa fa-pencil"></li>
@@ -45,11 +47,12 @@
 											<td>┗━<?= $child['title'];?></td>
 											<td><?= $child['name'];?></td>
 											<td><?= $child['sort'];?></td>
+                                            <td><?= $child['auth_explain']??'';?></td>
 											<td>
-												<a href="edit/<?= $child['auth_id'];?>" class="btn btn-primary btn-xs" title="修改">
+												<a href="edit?id=<?= $child['auth_id'];?>" class="btn btn-primary btn-xs" title="修改">
 													<li class="fa fa-pencil"></li>
 												</a>
-												<a href="del/<?= $child['auth_id'];?>" class="btn btn-danger btn-xs del" title="删除">
+												<a href="del?id=<?= $child['auth_id'];?>" class="btn btn-danger btn-xs del" title="删除">
 													<li class="fa fa-trash-o"></li>
 												</a>
 											</td>
@@ -61,11 +64,12 @@
                                                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;┗━<?= $childd['title'];?></td>
                                                     <td><?= $childd['name'];?></td>
                                                     <td><?= $childd['sort'];?></td>
+                                                    <td><?= $childd['auth_explain']??'';?></td>
                                                     <td>
                                                         <a href="edit?id=<?= $childd['auth_id'];?>" class="btn btn-primary btn-xs" title="修改">
                                                             <li class="fa fa-pencil"></li>
                                                         </a>
-                                                        <a href="del?id=<?= $childd['auth_id'];?>" class="btn btn-danger btn-xs del" title="删除">
+                                                        <a href="javascript:void(0)" data-url="/Admin/Menu/del?id=<?= $childd['auth_id'];?>" class="btn btn-danger btn-xs del" title="删除">
                                                             <li class="fa fa-trash-o"></li>
                                                         </a>
                                                     </td>
@@ -80,3 +84,15 @@
 			</table>
 		</div>
 	</div>
+<script>
+    $(function(){
+        $('.del').on('click',function(){
+            var url  = $(this).attr('data-url');
+            layer.confirm('确定要删除此菜单吗？', {
+                btn: ['确定', '取消'] //按钮
+            }, function() {
+                window.location.href = url;
+            });
+        })
+    })
+</script>
