@@ -248,4 +248,15 @@ class MY_Model extends CI_Model
 			return true;
 		}
 	}
+
+	/**
+	 * 批量更新
+	 * @param array $data 要更新的数据
+	 * @param string $key 主键条件
+	 * @return mixed
+	 */
+	public function _update_batch($data = [],$key = 'id')
+	{
+		return $this->db->update_batch($this->_table,$data,$key);
+	}
 }
