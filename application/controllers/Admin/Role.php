@@ -21,9 +21,9 @@ class Role extends Admin_Controller
 	{
 		$roles = $this->AdminRole->_get('*');
 		foreach ($roles as $key => $role) {
-			$roles[$key]['status'] = $this->AdminRole->msg
+//			$roles[$key]['status'] = $this->AdminRole->msg
 		}
-		$this->display('Role/index',$data);
+//		$this->display('Role/index',$data);
 	}
 
 	public function add()
