@@ -177,7 +177,7 @@
 		<!-- footer content -->
 		<footer>
 			<div class="pull-right">
-				Gentelella - Bootstrap Admin Template by Colorlib. More Templates
+				<?= $setting['footer']['value']??'Copyright © 2017 97ADMIN design by symphp'; ?>
 			</div>
 			<div class="clearfix"></div>
 		</footer>

@@ -22,6 +22,7 @@
  * @property AdminLog_model $AdminLog
  * @property Auth_model $Auth
  * @property Setting_model $Setting
+ * @property AdminRole_model $AdminRole
  *
  */
 class my_models

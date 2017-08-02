@@ -30,11 +30,11 @@ class Admin_Controller extends CI_Controller {
 	protected $admin = [];    //管理员信息
 	protected $menu = [];    //菜单列表
 	protected $current = [];    //当前操作
+	protected $setting = [];    //系统设置
 
 	public function __construct()
 	{
 		parent::__construct();
-
 		$this->load->set_ci_view_dir(ADMIN_VIEW_DIR);    //设置后台视图路径
 		$flag = false;
 
@@ -56,8 +56,16 @@ class Admin_Controller extends CI_Controller {
 			exit();
 		}
 		/** ---------------- 判断操作是否有权限，获取权限列表 ----------------**/
+		$superAdmin = $this->Admin->SuperAdmin($this->admin['id']);    //是否是超级管理员
+
 		$auth_name = ucfirst($this->router->fetch_class().'/'.$this->router->fetch_method());    //当前操作与方法
-		$checkAuthName = $this->Admin->getAdminAuth($this->admin['id'],['auth.name'=>$auth_name]);    //判断当前操作是否有权限
+
+		if($superAdmin == 1) {
+			$checkAuthName = $this->Auth->_get('auth_id',['auth.name'=>$auth_name]);
+		} else {
+			$checkAuthName = $this->Admin->getAdminAuth($this->admin['id'],['auth.name'=>$auth_name]);    //判断当前操作是否有权限
+		}
+
 		if($checkAuthName == false) {
 			header("Location: /Admin/Login/authError");
 			exit();
@@ -65,8 +73,14 @@ class Admin_Controller extends CI_Controller {
 			$this->current = $this->Auth->get_current_auth($checkAuthName[0]['auth_id']);
 		}
 
-		$admin_auth_arr = $this->Admin->getAdminAuth($this->admin['id']);    //获取角色所有权限
+		if($superAdmin == 1) {
+			$admin_auth_arr = $this->Auth->_get('*',['status'=>1]);
+		} else {
+			$admin_auth_arr = $this->Admin->getAdminAuth($this->admin['id']);    //获取角色所有权限
+		}
+
 		$this->menu = $this->get_menu_tree($admin_auth_arr);    //获取菜单列表
+		$this->setting = $this->Setting->getAll();    //获取系统设置
 	}
 
 	/**
@@ -76,9 +90,11 @@ class Admin_Controller extends CI_Controller {
 	 */
 	protected function display($view, $data = null)
 	{
-		$data['admin'] = $this->admin;
-		$data['menus'] = $this->menu;
-		$data['current'] = $this->current;
+		$data['admin'] = $this->admin;    //管理员信息
+		$data['menus'] = $this->menu;    //左侧菜单
+		$data['current'] = $this->current;    //当前操作方法
+		$data['setting'] = $this->setting;    //系统设置
+
 		$layout_data['content'] = $this->load->view($view,$data,true);
 		$this->load->view($this->_layout,$layout_data);
 	}

@@ -40,7 +40,7 @@ class Admin_model extends MY_Model
 		if(!$admin_id) {
 			return false;
 		} else {
-			$filed = 'auth.*,ar.role_id,ar.*,auth.explain as auth_explain';
+			$filed = 'auth.*';
 
 			$where['admin.id']  = $admin_id;
 			$where['ar.status'] = 1;
@@ -53,4 +53,22 @@ class Admin_model extends MY_Model
 			return $this->_get($filed,$where,'',['sort'=>'asc','id'=>'desc'],'',$join);
 		}
  	}
+
+	/**
+	 * 判断是否是超级管理员
+	 * @param int $admin_id
+	 * @return bool
+	 */
+	public function SuperAdmin(int $admin_id)
+	{
+		$sql = "SELECT role_id FROM `admin_role_accos`"
+			   ."WHERE `admin_id` = $admin_id";
+		$res = $this->_query($sql);
+		if($res == false) {
+			return false;
+		} else {
+			return $res[0]['role_id'];
+		}
+	}
+
 }

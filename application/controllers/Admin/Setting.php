@@ -11,9 +11,11 @@ class Setting extends Admin_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Setting_model','Setting');
 	}
 
+	/**
+	 * 网站设置
+	 */
 	public function setting()
 	{
 		if(IS_POST) {
