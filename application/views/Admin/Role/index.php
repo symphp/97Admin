@@ -10,7 +10,7 @@
 				<tr>
 					<th>id</th>
 					<th>角色名称</th>
-					<th>Controller/Function</th>
+					<th>状态</th>
 					<th>描述</th>
 					<th>操作</th>
 				</tr>
@@ -22,6 +22,7 @@
 									<th scope="row"><?=$role['role_id'];?></th>
 									<td><?=$role['role_name'];?></td>
 									<td><?=$role['explain'];?></td>
+									<td><?=$role['status'];?></td>
 									<td>
 										<a href="edit?id=<?= $role['role_id'];?>" class="btn btn-primary btn-xs" title="修改">
 											<li class="fa fa-pencil"></li>

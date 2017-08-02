@@ -55,6 +55,7 @@ class Admin_Controller extends CI_Controller {
 			header("Location: /Admin/Login/");
 			exit();
 		}
+
 		/** ---------------- 判断操作是否有权限，获取权限列表 ----------------**/
 		$superAdmin = $this->Admin->SuperAdmin($this->admin['id']);    //是否是超级管理员
 
@@ -70,11 +71,11 @@ class Admin_Controller extends CI_Controller {
 			header("Location: /Admin/Login/authError");
 			exit();
 		} else {
-			$this->current = $this->Auth->get_current_auth($checkAuthName[0]['auth_id']);
+			$this->current = $this->Auth->get_current_auth($checkAuthName[0]['auth_id']);    //获取当前操作方法
 		}
 
 		if($superAdmin == 1) {
-			$admin_auth_arr = $this->Auth->_get('*',['status'=>1]);
+			$admin_auth_arr = $this->Auth->_get('*',['status'=>1]);    //管理员获取所菜单
 		} else {
 			$admin_auth_arr = $this->Admin->getAdminAuth($this->admin['id']);    //获取角色所有权限
 		}
