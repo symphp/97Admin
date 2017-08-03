@@ -29,7 +29,7 @@ class Menu extends Admin_Controller
 			$data['name']   = $this->input->post('name');    //操作名（控制器/方法）
 			$data['icon']   = $this->input->post('icon')??'';    //操作规则图标
 			$data['sort']   = $this->input->post('sort')??1;    //排序
-			$data['status'] = $this->input->post('status')??1;    //是否显示
+			$data['status'] = $this->input->post('status') == 'on'?1:2;    //是否显示
 			$data['explain']= $this->input->post('explain')??'';    //描述
 			$data['pid']    = $this->input->post('pid')??0;    //父级id
 			$res = $this->Auth->_add($data);

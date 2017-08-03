@@ -76,8 +76,9 @@
                     <div class="itme form-group">
                         <label for="icon" class="control-label col-md-3 col-sm-3 col-xs-12">显示状态</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="radio" name="status" id="status1" value="1" checked="checked">显示
-                            <input type="radio" name="status" id="status2" value="2">不显示
+                            <label>
+                                <input name="status" type="checkbox" class="js-switch" checked="" data-switchery="true" style="display: none;"><small style="left: 12px; transition: background-color 0.4s, left 0.2s; background-color: rgb(255, 255, 255);">
+                            </label>
                         </div>
                     </div>
                     <div class="item form-group">

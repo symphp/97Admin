@@ -33,37 +33,12 @@
                             <input id="title" class="form-control col-md-7 col-xs-12" name="title" type="text" required>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">上级菜单<span class="required">*</span></label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <select class="form-control" name="pid">
-                                    <option value="0">顶级分类</option>
-                                    <?php if(!empty($menus)) :?>
-                                        <?php foreach ($menus as $menu) :?>
-                                            <option value="<?= $menu['auth_id'];?>"><?= $menu['title']??'';?></option>
-                                            <?php if($menu['children']) :?>
-                                                <?php foreach ($menu['children'] as $child) :?>
-                                                        <option value="<?php echo $child['auth_id'];?>">&nbsp;&nbsp;&nbsp;┗━
-                                                            <?= $child['title'];?>
-                                                        </option>
-                                                <?php endforeach;?>
-                                            <?php endif;?>
-										<?php endforeach;?>
-                                    <?php endif;?>
-                                </select>
-                            </div>
-                    </div>
                     <div class="itme form-group">
                         <label for="icon" class="control-label col-md-3 col-sm-3 col-xs-12">显示状态</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="radio" name="status" id="status1" value="1" checked="checked">显示
-                            <input type="radio" name="status" id="status2" value="2">不显示
-                        </div>
-                    </div>
-                    <div class="itme form-group">
-                        <label for="icon" class="control-label col-md-3 col-sm-3 col-xs-12">权限</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            
+                                <label>
+                                    <input name="status" type="checkbox" class="js-switch" checked="" data-switchery="true" style="display: none;"><small style="left: 12px; transition: background-color 0.4s, left 0.2s; background-color: rgb(255, 255, 255);">
+                                </label>
                         </div>
                     </div>
                     <div class="item form-group">

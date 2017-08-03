@@ -21,7 +21,7 @@ class Role extends Admin_Controller
 	{
 		$roles = $this->AdminRole->_get('*');
 		foreach ($roles as $key => $role) {
-			$roles[$key]['status'] = $this->AdminRole->msg['status'][$role['status']];    //获取对于说明
+			$roles[$key]['status'] = $this->AdminRole->msg['status'][$role['status']];    //获取对应说明
 		}
 		$data['roles'] = $roles;
 		$this->display('Role/index',$data);
@@ -31,11 +31,11 @@ class Role extends Admin_Controller
 	public function add()
 	{
 		if(IS_POST) {
-
+			
 		} else {
 			$res = $this->Auth->_get('*',['status'=>1]);
 			if($res == false) {
-				$data['menus'] = [];
+				$data['menus'] = array();
 			} else {
 				$data['menus'] = $this->get_menu_tree($res);    //获取所有权限菜单
 			}

@@ -83,7 +83,7 @@
                     <div class="item form-group">
                         <label for="icon" class="control-label col-md-3 col-sm-3 col-xs-12">页面提示</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                             <textarea class="resizable_textarea form-control" name="explain" placeholder="" data-parsley-id="16"><?= trim($auth['auth_explain'])??'';?></textarea>
+                             <textarea class="resizable_textarea form-control" name="explain" placeholder="" data-parsley-id="16"><?= trim($auth['explain'])??'';?></textarea>
                         </div>
                     </div>
                     <div class="item form-group">

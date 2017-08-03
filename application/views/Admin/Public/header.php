@@ -22,12 +22,17 @@
 	<link href="/public/assets/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
 	<!-- bootstrap-daterangepicker -->
 	<link href="/public/assets/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- switchery -->
+    <link href="/public/assets/switchery/dist/switchery.css" rel="stylesheet">
 	<!-- Custom Theme Style -->
 	<link href="/public/assets/build/css/custom.min.css" rel="stylesheet">
     <!-- icon-->
     <link rel="shortcut icon" href="/public/assets/ico/apple-touch-icon-57-precomposed.png">
+
     <!-- jquery -->
     <script src="/public/assets/jquery/dist/jquery.min.js"></script>
-    <!-- jquery -->
+    <!-- Switchery -->
+    <script src="/public/assets/switchery/dist/switchery.js"></script>
+    <!-- layer -->
     <script src="/public/assets/layer/layer.js"></script>
 </head>
