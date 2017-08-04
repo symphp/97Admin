@@ -20,12 +20,17 @@
         });
     });
 </script>
+<style>
+    .icheckbox_flat-green{
+        margin-top: -2px;
+    }
+</style>
 <link rel="stylesheet" href="/public/css/validate.css">
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_content">
-                <form class="form-horizontal form-label-left" action="add" method="post" id="autoForm">
+                <form class="form-horizontal form-label-left" action="add" method="post" id="autoForm" style="font-size: 15px;font-weight: normal">
                     <span class="section">添加角色</span>
                     <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">角色名称 <span class="required">*</span></label>
@@ -39,6 +44,44 @@
                                 <label>
                                     <input name="status" type="checkbox" class="js-switch" checked="" data-switchery="true" style="display: none;"><small style="left: 12px; transition: background-color 0.4s, left 0.2s; background-color: rgb(255, 255, 255);">
                                 </label>
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label for="icon" class="control-label col-md-3 col-sm-3 col-xs-12">权限选择</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <?php if($menus) :?>
+                                <?php foreach ($menus as $menu) :?>
+                                    <div class="panel panel-success">
+                                        <div class="panel-heading form-inline">
+                                            <label style="margin-left: 15px;" class="father">
+                                                <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" value="<?= $menu['auth_id']??0;?>" name="role[]" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                                                <span class="lbl"> <?= $menu['title']??'';?> </span>
+                                            </label>
+                                            <span class="tools pull-right">
+										        <a href="javascript:;" class="fa fa-chevron-down"></a>
+									        </span>
+                                        </div>
+                                        <?php if(isset($menu['children'])) :?>
+                                            <div class="panel-body panel-border">
+                                                <?php foreach ($menu['children'] as $child) :?>
+                                                        <label style="margin-left: 15px;" class="son">
+                                                            <div class="icheckbox_flat-green hover" style="position: relative;"><input value="<?= $child['auth_id']??0;?>" name="role[]" type="checkbox" class="flat children" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                                                            <span class="lbl"> <?= $child['title']??'';?></span>
+                                                        </label>
+                                                        <?php if(isset($child['children'])) :?>
+                                                            <?php foreach ($child['children'] as $chi) :?>
+                                                            <label style="margin-left: 15px;" class="son">
+                                                                <div class="icheckbox_flat-green hover" style="position: relative;"><input value="<?= $chi['auth_id']??0;?>" name="role[]" type="checkbox" class="flat children" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                                                                <span class="lbl"> <?= $chi['title']??'';?></span>
+                                                            </label>
+                                                            <?php endforeach;?>
+                                                        <?php endif;?>
+                                                <?php endforeach;?>
+                                            </div>
+                                        <?php endif;?>
+                                    </div>
+                                <?php endforeach;?>
+                            <?php endif;?>
                         </div>
                     </div>
                     <div class="item form-group">

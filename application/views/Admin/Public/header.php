@@ -35,4 +35,6 @@
     <script src="/public/assets/switchery/dist/switchery.js"></script>
     <!-- layer -->
     <script src="/public/assets/layer/layer.js"></script>
+    <!-- common -->
+    <script src="/public/js/common.js"></script>
 </head>

@@ -31,9 +31,9 @@ class Role extends Admin_Controller
 	public function add()
 	{
 		if(IS_POST) {
-			
+			exit(var_dump($_POST['role']));
 		} else {
-			$res = $this->Auth->_get('*',['status'=>1]);
+			$res = $this->Auth->_get('*',['status'=>1],[],['sort'=>'desc','auth_id'=>'desc']);
 			if($res == false) {
 				$data['menus'] = array();
 			} else {
