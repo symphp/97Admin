@@ -16,15 +16,16 @@ $(function () {
         if($(this).find($(":checkbox")).prop('checked')){
             //取消勾选子菜单
             el.removeClass('checked');
-            ck.attr('checked',false)
+            ck.prop('checked',false)
         } else {
             //勾选所有子菜单
             el.addClass('checked');
-            ck.attr('checked',true);
+            ck.prop('checked',true);
         }
     })
 
     $('.son').on('click',function () {
         $(this).parents(".panel-success").find(".icheckbox_flat-green:eq(1)").addClass('checked');
+        $(this).parents(".panel-success").find(".father").prop("checked",true);
     })
 })

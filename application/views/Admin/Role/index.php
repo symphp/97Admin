@@ -27,9 +27,16 @@
 										<a href="edit?id=<?= $role['role_id'];?>" class="btn btn-primary btn-xs" title="修改">
 											<li class="fa fa-pencil"></li>
 										</a>
-										<a href="del?id=<?= $role['role_id'];?>" class="btn btn-danger btn-xs del" title="删除">
-											<li class="fa fa-trash-o"></li>
-										</a>
+                                        <?php if($role['status'] == '显示') :?>
+                                            <a href="del?id=<?= $role['role_id'];?>" class="btn btn-danger btn-xs del" title="删除">
+                                                <li class="fa fa-trash-o"></li>
+                                            </a>
+                                        <?php else:?>
+                                            <a href="javascript:void(0)" class="btn btn-default btn-xs" title="不操作">
+                                                <li class="fa fa-ban"></li>
+                                            </a>
+                                        <?php endif;?>
+
 									</td>
 								</tr>
 							<?php endforeach;?>

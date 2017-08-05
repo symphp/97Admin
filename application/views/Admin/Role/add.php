@@ -35,7 +35,13 @@
                     <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">角色名称 <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="title" class="form-control col-md-7 col-xs-12" name="title" type="text" required>
+                            <input id="title" class="form-control col-md-7 col-xs-12" name="role_name" type="text" required>
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label for="icon" class="control-label col-md-3 col-sm-3 col-xs-12">角色说明</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <textarea class="resizable_textarea form-control" name="explain" placeholder="" data-parsley-id="16"></textarea>
                         </div>
                     </div>
                     <div class="itme form-group">
@@ -54,7 +60,7 @@
                                     <div class="panel panel-success">
                                         <div class="panel-heading form-inline">
                                             <label style="margin-left: 15px;" class="father">
-                                                <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" value="<?= $menu['auth_id']??0;?>" name="role[]" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                                                <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" value="<?= $menu['auth_id']??0;?>" name="role[]" class="flat father" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
                                                 <span class="lbl"> <?= $menu['title']??'';?> </span>
                                             </label>
                                             <span class="tools pull-right">
@@ -82,12 +88,6 @@
                                     </div>
                                 <?php endforeach;?>
                             <?php endif;?>
-                        </div>
-                    </div>
-                    <div class="item form-group">
-                        <label for="icon" class="control-label col-md-3 col-sm-3 col-xs-12">角色说明</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                             <textarea class="resizable_textarea form-control" name="explain" placeholder="" data-parsley-id="16"></textarea>
                         </div>
                     </div>
                     <div class="item form-group">

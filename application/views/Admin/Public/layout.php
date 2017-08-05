@@ -175,9 +175,9 @@
         </div>
 
 		<!-- footer content -->
-		<footer>
-			<div class="pull-right">
-				<?= $setting['footer']['value']??'Copyright © 2017 97ADMIN design by symphp'; ?>
+		<footer style="background: #5b6e84;color: white">
+			<div class="text-center">
+				<?= $setting['footer']['value']??'Copyright © 2017 <a href="" target="_blank" style="color: #72d0eb;font-size: 16px;">97Admin</a> design by symphp'; ?>
 			</div>
 			<div class="clearfix"></div>
 		</footer>
