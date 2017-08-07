@@ -61,7 +61,7 @@ class Admin_Controller extends CI_Controller {
 
 		$auth_name = ucfirst($this->router->fetch_class().'/'.$this->router->fetch_method());    //当前操作与方法
 
-		if($superAdmin == 1) {
+		if($superAdmin) {
 			$checkAuthName = $this->Auth->_get('auth_id',['auth.name'=>$auth_name]);
 		} else {
 			$checkAuthName = $this->Admin->getAdminAuth($this->admin['id'],['auth.name'=>$auth_name]);    //判断当前操作是否有权限
@@ -74,7 +74,7 @@ class Admin_Controller extends CI_Controller {
 			$this->current = $this->Auth->get_current_auth($checkAuthName[0]['auth_id']);    //获取当前操作方法
 		}
 
-		if($superAdmin == 1) {
+		if($superAdmin) {
 			$admin_auth_arr = $this->Auth->_get('*',['status'=>1]);    //管理员获取所菜单
 		} else {
 			$admin_auth_arr = $this->Admin->getAdminAuth($this->admin['id']);    //获取角色所有权限

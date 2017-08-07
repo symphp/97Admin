@@ -125,9 +125,6 @@ class Menu extends Admin_Controller
 	 */
 	public function get_all_menu($id)
 	{
-		if(!is_int($id)) {
-			return false;
-		}
 		$menus = $this->Admin->getAdminAuth($id);    //获取菜单权限列表
 		return $this->get_menu_tree($menus);
 	}

@@ -35,13 +35,11 @@ class Admin_model extends MY_Model
 	 * @param array $where
 	 * @return bool|mixed
 	 */
-	public function getAdminAuth(int $admin_id,$where = [])
+	public function getAdminAuth(int $admin_id,$where = [],$filed = 'auth.*')
 	{
 		if(!$admin_id) {
 			return false;
 		} else {
-			$filed = 'auth.*';
-
 			$where['admin.id']  = $admin_id;
 			$where['ar.status'] = 1;
 			$where['auth.status'] = 1;

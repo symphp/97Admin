@@ -20,10 +20,8 @@ class Role extends Admin_Controller
 	public function index()
 	{
 		$roles = $this->AdminRole->_get('*');
-		foreach ($roles as $key => $role) {
-			$roles[$key]['status'] = $this->AdminRole->msg['status'][$role['status']];    //获取对应说明
-		}
-		$data['roles'] = $roles;
+
+		$data['roles'] = $this->changeMsg($roles);
 		$this->display('Role/index',$data);
 	}
 
@@ -83,5 +81,51 @@ class Role extends Admin_Controller
 			$success['url'] = 'index';
 			$this->success($success);
 		}
+	}
+
+	/**
+	 * 编辑角色
+	 */
+	public function edit()
+	{
+		if(IS_POST) {
+
+		} else {
+			$id = $this->input->get('id')??0;
+
+			$res = $this->Auth->_get('*',['status'=>1],[],['sort'=>'desc','auth_id'=>'desc']);
+			if($res == false) {
+				$data['menus'] = array();
+			} else {
+				$data['menus'] = $this->get_menu_tree($res);    //获取所有权限菜单
+			}
+
+			$auth_ids = $this->Admin->getAdminAuth($this->admin['id'],[],'arac.auth_id');    //获取当前角色权限id
+			foreach ($auth_ids as $auth_id) {
+				$data['auth_ids'][] = $auth_id['auth_id'];
+			}
+			$admin_role = $this->AdminRole->_getOne('*',['role_id'=>$id]);    //角色信息
+			if($admin_role == false) {
+				$error['msg'] = '编辑角色失败';
+				$this->error($error);
+			}
+			$data['admin_role']= $this->changeMsg($admin_role);
+			$this->display('Role/edit',$data);
+		}
+	}
+
+	/**
+	 * 转换模型中对应的字段说明 如 status 1 2 显示 隐藏
+	 */
+	public function changeMsg($data)
+	{
+		if(count($data) == count($data, 1)) {
+			$data['status'] = $this->AdminRole->msg['status'][$data['status']];
+		} else {
+			foreach ($data as $key => $value) {
+				$data[$key]['status'] = $this->AdminRole->msg['status'][$value['status']];    //获取对应说明
+			}
+		}
+		return $data;
 	}
 }
