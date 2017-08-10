@@ -12,6 +12,7 @@ class Role extends Admin_Controller
 	{
 		parent::__construct();
 		$this->load->model('AdminRole_model','AdminRole');
+		$this->load->model('AuthRoleAccos_model','AuthRoleAccos');
 	}
 
 	/**
@@ -89,7 +90,27 @@ class Role extends Admin_Controller
 	public function edit()
 	{
 		if(IS_POST) {
-
+			$data['role_name'] = trim($this->input->post('role_name'));    //角色名称
+			$data['status']    = $this->input->post('status') == 'on'?1:2;    //是否显示
+			$data['explain']   = trim($this->input->post('explain'));    //角色说明
+			$roles             = $this->input->post('role')??array();    //权限
+			$id                = $this->input->post('role_id')??0;    //角色id
+			if(is_array($roles) && count($roles) > 0) {
+				foreach ($roles as $role) {
+					$rolesArr[]['auth_id'] = $role;    //转换成多维数组进行批量插入
+				}
+			} else {
+				$rolesArr = array();
+			}
+			$res = $this->AdminRole->editRole($data,['role_id'=>$id],$rolesArr);    //编辑角色
+			if($res == false) {
+				$error['msg'] = '编辑角色失败';
+				$this->error($error);
+			} else {
+				$success['msg'] = '编辑角色成功';
+				$success['url'] = 'index';
+				$this->success($success);
+			}
 		} else {
 			$id = $this->input->get('id')??0;
 
@@ -100,7 +121,7 @@ class Role extends Admin_Controller
 				$data['menus'] = $this->get_menu_tree($res);    //获取所有权限菜单
 			}
 
-			$auth_ids = $this->Admin->getAdminAuth($this->admin['id'],[],'arac.auth_id');    //获取当前角色权限id
+			$auth_ids = $this->AuthRoleAccos->_get('*',['role_id'=>$id]);    //获取当前角色权限id
 			foreach ($auth_ids as $auth_id) {
 				$data['auth_ids'][] = $auth_id['auth_id'];
 			}

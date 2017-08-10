@@ -23,6 +23,7 @@
  * @property Auth_model $Auth
  * @property Setting_model $Setting
  * @property AdminRole_model $AdminRole
+ * @property AuthRoleAccos_model $AuthRoleAccos
  *
  */
 class my_models

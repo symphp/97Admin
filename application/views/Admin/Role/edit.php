@@ -30,7 +30,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_content">
-                <form class="form-horizontal form-label-left" action="add" method="post" id="autoForm" style="font-size: 15px;font-weight: normal">
+                <form class="form-horizontal form-label-left" action="edit" method="post" id="autoForm" style="font-size: 15px;font-weight: normal">
                     <span class="section">编辑角色</span>
                     <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">角色名称 <span class="required">*</span></label>
@@ -60,7 +60,7 @@
                                     <div class="panel panel-success">
                                         <div class="panel-heading form-inline">
                                             <label style="margin-left: 15px;" class="father">
-                                                <div class="icheckbox_flat-green" style="position: relative;"><input <?php if(in_array($menu['auth_id'],$auth_ids) || $admin_role['role_id'] == 1) {echo 'checked';}; ?> type="checkbox" value="<?= $menu['auth_id']??0;?>" name="role[]" class="flat father" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                                                <div class="icheckbox_flat-green" style="position: relative;"><input <?php if(in_array($menu['auth_id'],$auth_ids??[]) || $admin_role['role_id'] == 1) {echo 'checked';}; ?> type="checkbox" value="<?= $menu['auth_id']??0;?>" name="role[]" class="flat father" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
                                                 <span class="lbl"> <?= $menu['title']??'';?> </span>
                                             </label>
                                             <span class="tools pull-right">
@@ -71,13 +71,13 @@
                                             <div class="panel-body panel-border">
                                                 <?php foreach ($menu['children'] as $child) :?>
                                                         <label style="margin-left: 15px;" class="son">
-                                                            <div class="icheckbox_flat-green" style="position: relative;"><input <?php if(in_array($child['auth_id'],$auth_ids) || $admin_role['role_id'] == 1) {echo 'checked';}; ?> value="<?= $child['auth_id']??0;?>" name="role[]" type="checkbox" class="flat children" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                                                            <div class="icheckbox_flat-green" style="position: relative;"><input <?php if(in_array($child['auth_id'],$auth_ids??[]) || $admin_role['role_id'] == 1) {echo 'checked';}; ?> value="<?= $child['auth_id']??0;?>" name="role[]" type="checkbox" class="flat children" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
                                                             <span class="lbl"> <?= $child['title']??'';?></span>
                                                         </label>
                                                         <?php if(isset($child['children'])) :?>
                                                             <?php foreach ($child['children'] as $chi) :?>
                                                             <label style="margin-left: 15px;" class="son">
-                                                                <div class="icheckbox_flat-green" style="position: relative;"><input <?php if(in_array($chi['auth_id'],$auth_ids) || $admin_role['role_id'] == 1) {echo 'checked';}; ?> value="<?= $chi['auth_id']??0;?>" name="role[]" type="checkbox" class="flat children" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                                                                <div class="icheckbox_flat-green" style="position: relative;"><input <?php if(in_array($chi['auth_id'],$auth_ids??[]) || $admin_role['role_id'] == 1) {echo 'checked';}; ?> value="<?= $chi['auth_id']??0;?>" name="role[]" type="checkbox" class="flat children" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
                                                                 <span class="lbl"> <?= $chi['title']??'';?></span>
                                                             </label>
                                                             <?php endforeach;?>
@@ -93,6 +93,7 @@
                     <div class="item form-group">
                         <div class="col-md-6 col-md-offset-3">
                             <button id="reset" type="button" class="btn btn-primary">重置</button>
+                            <input type="hidden" name="role_id" value="<?=$_GET['id']??0?>">
                             <button id="send" type='submit' class="btn btn-success">提交</button>
                         </div>
                     </div>

@@ -28,7 +28,7 @@
 											<li class="fa fa-pencil"></li>
 										</a>
                                         <?php if($role['status'] == '显示') :?>
-                                            <a href="del?id=<?= $role['role_id'];?>" class="btn btn-danger btn-xs del" title="删除">
+                                            <a href="del?id=<?= $role['role_id'];?>" data-url="/Admin/Role/del?id=<?= $role['role_id'];?>" class="btn btn-danger btn-xs del" title="删除">
                                                 <li class="fa fa-trash-o"></li>
                                             </a>
                                         <?php else:?>
