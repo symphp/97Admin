@@ -67,7 +67,7 @@
                                 </a>
                             </li>
                             <li><a href="javascript:;">Help</a></li>
-                            <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> 退出</a></li>
+                            <li><a href="/Admin/Login/logout"><i class="fa fa-sign-out pull-right"></i> 退出</a></li>
                         </ul>
                     </li>
 

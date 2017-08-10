@@ -68,6 +68,17 @@ class Login extends Admin_Controller
 	}
 
 	/**
+	 * 退出登录
+	 */
+	public function logout()
+	{
+		$this->session->unset_userdata('token');
+		$data['msg'] = '退出成功，正在跳转首页！';
+		$data['url'] = '/Admin/Index/index';
+		$this->success($data);
+	}
+
+	/**
 	 * 无权限页面
 	 */
 	public function authError()
