@@ -28,7 +28,7 @@
 											<li class="fa fa-pencil"></li>
 										</a>
                                         <?php if($role['status'] == '显示') :?>
-                                            <a href="del?id=<?= $role['role_id'];?>" data-url="/Admin/Role/del?id=<?= $role['role_id'];?>" class="btn btn-danger btn-xs del" title="删除">
+                                            <a href="javascript:void;" data-url="/Admin/Role/del?id=<?= $role['role_id'];?>" class="btn btn-danger btn-xs del" title="删除">
                                                 <li class="fa fa-trash-o"></li>
                                             </a>
                                         <?php else:?>
@@ -49,9 +49,9 @@
     $(function(){
         $('.del').on('click',function(){
             var url  = $(this).attr('data-url');
-            layer.confirm('确定要删除此菜单吗？', {
+            layer.confirm('确定要删除此角色吗？', {
                 btn: ['确定', '取消'] //按钮
-            }, function() {
+            },function() {
                 window.location.href = url;
             });
         })
