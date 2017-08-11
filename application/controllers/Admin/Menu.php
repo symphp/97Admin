@@ -62,7 +62,11 @@ class Menu extends Admin_Controller
 			$data['pid']    = $this->input->post('pid')??0;    //父级id
 			$auth_id = $this->input->post('id')??0;    //auth_id
 			/** -------------- 判断当前修改的auth是否属于当前用户 ---------------- **/
-			$auth = $this->Admin->getAdminAuth($this->admin['id'],['auth.auth_id'=>$auth_id]);    //获取当前菜单
+			if(!$this->Admin->SuperAdmin(($this->admin['id']))) {
+				$auth = $this->Admin->getAdminAuth($this->admin['id'],['auth.auth_id'=>$auth_id]);    //获取当前菜单
+			} else {
+				$auth = true;
+			}
 			if(!$auth) {
 				$error['msg'] = '参数不正确，请稍后再试！';
 				$this->error($error);
@@ -84,7 +88,12 @@ class Menu extends Admin_Controller
 				$this->error($error);
 			}
 			$data['menus'] = $this->get_all_menu($this->admin['id']);    //获取树状菜单列表
-			$auth = $this->Admin->getAdminAuth($this->admin['id'],['auth.auth_id'=>$id]);    //获取当前菜单
+			//判断是否是超级管理员
+			if($this->Admin->SuperAdmin(($this->admin['id']))) {
+				$auth = $this->Auth->_get('*',['status'=>1,'auth_id'=>$id]);
+			} else {
+				$auth = $this->Admin->getAdminAuth($this->admin['id'],['auth.auth_id'=>$id]);    //获取当前菜单
+			}
 			if($auth != false) {
 				$data['auth'] = $auth[0];
 				$this->display('/Menu/edit',$data);

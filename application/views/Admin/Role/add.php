@@ -16,7 +16,11 @@
             }
         });
         $("#reset").click(function() {
-            validator.resetForm();
+            $(':input','#autoForm')
+                .not(':button, :submit, :reset, :hidden')
+                .val('')
+                .removeAttr('checked')
+                .removeAttr('selected');
         });
     });
 </script>
@@ -92,8 +96,8 @@
                     </div>
                     <div class="item form-group">
                         <div class="col-md-6 col-md-offset-3">
-                            <button id="reset" type="button" class="btn btn-primary">重置</button>
                             <button id="send" type='submit' class="btn btn-success">提交</button>
+                            <button id="reset" type="button" class="btn btn-defalut">重置</button>
                         </div>
                     </div>
                 </form>

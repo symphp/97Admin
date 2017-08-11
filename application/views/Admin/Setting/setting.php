@@ -16,7 +16,11 @@
             }
         });
         $("#reset").click(function() {
-            validator.resetForm();
+            $(':input','#autoForm')
+                .not(':button, :submit, :reset, :hidden')
+                .val('')
+                .removeAttr('checked')
+                .removeAttr('selected');
         });
     });
 </script>

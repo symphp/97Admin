@@ -16,7 +16,11 @@
             }
         });
         $("#reset").click(function() {
-            validator.resetForm();
+            $(':input','#autoForm')
+                .not(':button, :submit, :reset, :hidden')
+                .val('')
+                .removeAttr('checked')
+                .removeAttr('selected');
         });
     });
 </script>
@@ -56,7 +60,7 @@
                     <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Controller/Function</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="name" name="name" class="form-control col-md-7 col-xs-12" value="<?= $auth['name'];?>" required>
+                            <input type="text" id="name" name="name" class="form-control col-md-7 col-xs-12" value="<?= $auth['name'];?>">
                         </div>
                     </div>
                     <div class="item form-group">
