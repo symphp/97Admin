@@ -110,7 +110,11 @@ class Menu extends Admin_Controller
 	public function del()
 	{
 		$auth_id = $this->input->get('id')??false;    //权限id
-		$auth    = $this->Admin->getAdminAuth($this->admin['id'],['auth.auth_id'=>$auth_id]);    //获取当前菜单
+		if(!$this->Admin->SuperAdmin(($this->admin['id']))) {
+			$auth = $this->Admin->getAdminAuth($this->admin['id'],['auth.auth_id'=>$auth_id]);    //获取当前菜单
+		} else {
+			$auth = true;
+		}
 		if(!$auth) {
 			$error['msg'] = '参数不正确，删除失败！';
 			$this->error($error);

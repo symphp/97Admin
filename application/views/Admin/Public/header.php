@@ -5,8 +5,10 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="/public/assets/ico/logo_48.png">
-	<title><?= $current['title']??'';?>-<?= $setting['title']['value']??'';?></title>
-
+	<title><?= $current['title']??'';?>
+        <?php if(isset($current['titile']) || isset($setting['title']['value'])) {echo '-';} ?>
+        <?= $setting['title']['value']??'';?>
+    </title>
 	<!-- Bootstrap -->
 	<link href="/public/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 	<!-- Font Awesome -->

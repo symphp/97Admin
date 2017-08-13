@@ -33,6 +33,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="head_pic">头像
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="head_pic" type="image" multiple class="file" data-overwrite-initial="false" data-min-file-count="1">
                             <img src="" alt="">
 <!--                            <input type="text" id="head_pic" name="head_pic"  value="--><?//= $admin['head_pic']??'';?><!--"  placeholder="fa fa-tachometer" class="form-control col-md-7 col-xs-12" >-->
                         </div>
@@ -74,3 +75,20 @@
 		</div>
 	</div>
 </div>
+<script>
+    $("#head_pic").fileinput({
+        uploadUrl: '#', // you must set a valid URL here else you will get an error
+        allowedFileExtensions : ['jpg', 'png','gif'],
+        overwriteInitial: false,
+        maxFileSize: 1000,
+        maxFilesNum: 10,
+        language: 'zh', //设置语言
+        browseClass: "btn btn-primary", //按钮样式
+        showPreview : true,
+        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+        slugCallback: function(filename) {
+            return filename.replace('(', '_').replace(']', '_');
+        }
+    });
+    $(".file-drop-zone-title").html("拖拽或者点击选择文件");
+</script>

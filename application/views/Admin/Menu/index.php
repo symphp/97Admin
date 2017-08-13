@@ -35,7 +35,7 @@
 										<a href="edit?id=<?= $menu['auth_id'];?>" class="btn btn-primary btn-xs" title="修改">
 											<li class="fa fa-pencil"></li>
 										</a>
-										<a href="del?id=<?= $menu['auth_id'];?>" class="btn btn-danger btn-xs del" title="删除">
+										<a href="javascript:void(0);" data-url="/Admin/Menu/del?id=<?= $menu['auth_id'];?>" class="btn btn-danger btn-xs del" title="删除">
 											<li class="fa fa-trash-o"></li>
 										</a>
 									</td>
@@ -52,7 +52,7 @@
 												<a href="edit?id=<?= $child['auth_id'];?>" class="btn btn-primary btn-xs" title="修改">
 													<li class="fa fa-pencil"></li>
 												</a>
-												<a href="del?id=<?= $child['auth_id'];?>" class="btn btn-danger btn-xs del" title="删除">
+												<a href="javascript:void(0);" data-url="/Admin/Menu/del?id=<?= $child['auth_id'];?>" class="btn btn-danger btn-xs del" title="删除">
 													<li class="fa fa-trash-o"></li>
 												</a>
 											</td>
