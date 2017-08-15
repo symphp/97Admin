@@ -37,15 +37,15 @@ class Login extends Admin_Controller
 	public function handleLogin()
 	{
 		$verify_code = $this->input->post('verify_code');
-		if($verify_code && strtolower($verify_code) == $_SESSION['verify_code']??'') {
+		if ($verify_code && strtolower($verify_code) == $_SESSION['verify_code']??'') {
 			$username = $this->input->post('username')??'';
 			$password = $this->input->post('password')??'';
 			$remeber  = $this->input->post('remeber')??false;
 			$admin_info = $this->Admin->checkUser($username,$password);
-			if($admin_info) {
+			if ($admin_info) {
 				$token = md5($admin_info['username'].uniqid());    //登录认证
 				$update_res = $this->Admin->_update(['token'=>$token],['id'=>$admin_info['id']]);    //存入token认证
-				if($remeber) {
+				if ($remeber) {
 					$this->session->set_userdata('token', $token);
 				} else {
 					$this->session->set_userdata('token', $token);

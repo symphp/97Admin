@@ -31,12 +31,12 @@ class Role extends Admin_Controller
 	 */
 	public function add()
 	{
-		if(IS_POST) {
+		if (IS_POST) {
 			$data['role_name'] = trim($this->input->post('role_name'));    //角色名称
 			$data['status']    = $this->input->post('status') == 'on'?1:2;    //是否显示
 			$data['explain']   = trim($this->input->post('explain'));    //角色说明
 			$roles             = $this->input->post('role')??array();    //权限
-			if(is_array($roles) && count($roles) > 0) {
+			if (is_array($roles) && count($roles) > 0) {
 				foreach ($roles as $role) {
 					$rolesArr[]['auth_id'] = $role;    //转换成多维数组进行批量插入
 				}
@@ -44,7 +44,7 @@ class Role extends Admin_Controller
 				$rolesArr = array();
 			}
 			$res = $this->AdminRole->addRole($data,$rolesArr);    //添加角色
-			if($res == false) {
+			if ($res == false) {
 				$error['msg'] = '添加角色失败';
 				$this->error($error);
 			} else {
@@ -54,7 +54,7 @@ class Role extends Admin_Controller
 			}
 		} else {
 			$res = $this->Auth->_get('*',['status'=>1],[],['sort'=>'desc','auth_id'=>'desc']);
-			if($res == false) {
+			if ($res == false) {
 				$data['menus'] = array();
 			} else {
 				$data['menus'] = $this->get_menu_tree($res);    //获取所有权限菜单
@@ -69,12 +69,12 @@ class Role extends Admin_Controller
 	public function del()
 	{
 		$role_id = $this->input->get('id')??0;
-		if($role_id < 1) {
+		if ($role_id < 1) {
 			$error['msg'] = '参数不正确，删除失败！';
 			$this->error($error);
 		}
 		$res = $this->AdminRole->delRole($role_id);
-		if($res == false) {
+		if ($res == false) {
 			$error['msg'] = '删除角色失败';
 			$this->error($error);
 		} else {
@@ -89,13 +89,13 @@ class Role extends Admin_Controller
 	 */
 	public function edit()
 	{
-		if(IS_POST) {
+		if (IS_POST) {
 			$data['role_name'] = trim($this->input->post('role_name'));    //角色名称
 			$data['status']    = $this->input->post('status') == 'on'?1:2;    //是否显示
 			$data['explain']   = trim($this->input->post('explain'));    //角色说明
 			$roles             = $this->input->post('role')??array();    //权限
 			$id                = $this->input->post('role_id')??0;    //角色id
-			if(is_array($roles) && count($roles) > 0) {
+			if (is_array($roles) && count($roles) > 0) {
 				foreach ($roles as $role) {
 					$rolesArr[]['auth_id'] = $role;    //转换成多维数组进行批量插入
 				}
@@ -103,7 +103,7 @@ class Role extends Admin_Controller
 				$rolesArr = array();
 			}
 			$res = $this->AdminRole->editRole($data,['role_id'=>$id],$rolesArr);    //编辑角色
-			if($res == false) {
+			if ($res == false) {
 				$error['msg'] = '编辑角色失败';
 				$this->error($error);
 			} else {
@@ -115,7 +115,7 @@ class Role extends Admin_Controller
 			$id = $this->input->get('id')??0;
 
 			$res = $this->Auth->_get('*',['status'=>1],[],['sort'=>'desc','auth_id'=>'desc']);
-			if($res == false) {
+			if ($res == false) {
 				$data['menus'] = array();
 			} else {
 				$data['menus'] = $this->get_menu_tree($res);    //获取所有权限菜单
@@ -126,7 +126,7 @@ class Role extends Admin_Controller
 				$data['auth_ids'][] = $auth_id['auth_id'];
 			}
 			$admin_role = $this->AdminRole->_getOne('*',['role_id'=>$id]);    //角色信息
-			if($admin_role == false) {
+			if ($admin_role == false) {
 				$error['msg'] = '编辑角色失败';
 				$this->error($error);
 			}
@@ -140,7 +140,7 @@ class Role extends Admin_Controller
 	 */
 	public function changeMsg($data)
 	{
-		if(count($data) == count($data, 1)) {
+		if (count($data) == count($data, 1)) {
 			$data['status'] = $this->AdminRole->msg['status'][$data['status']];
 		} else {
 			foreach ($data as $key => $value) {

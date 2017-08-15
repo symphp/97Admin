@@ -18,13 +18,13 @@ class Setting extends Admin_Controller
 	 */
 	public function setting()
 	{
-		if(IS_POST) {
+		if (IS_POST) {
 			foreach ($_POST as $key=>$value) {
 				$arr[$key]['key'] = trim($key);
 				$arr[$key]['value'] = trim($value);
 			}
 			$res = $this->Setting->_update_batch($arr,'key');
-			if($res == false) {
+			if ($res == false) {
 				$error['msg'] = '网站设置失败，请稍后再试！';
 				$this->error($error);
 			} else {

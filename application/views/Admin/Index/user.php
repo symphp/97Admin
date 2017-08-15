@@ -1,5 +1,7 @@
+<link rel="stylesheet" href="/public/css/bootstrap-fileupload.css">
 <script src="/public/assets/jquery-validate/dist/jquery.validate.min.js"></script>
 <script src="/public/assets/jquery-validate/localization/messages_zh.js"></script>
+<script src="/public/js/bootstrap-fileupload.js"></script>
 <script>
     $().ready(function() {
         var validator = $("#autoForm").validate({
@@ -21,7 +23,7 @@
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="x_panel">
 			<div class="x_content">
-				<form class="form-horizontal form-label-left" action="user" method="post" id="autoForm">
+				<form class="form-horizontal form-label-left" action="user" method="post" id="autoForm" enctype="multipart/form-data">
 					<span class="section">个人资料</span>
 					<div class="item form-group">
 						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">用户名 <span class="required">*</span></label>
@@ -33,9 +35,26 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="head_pic">头像
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="head_pic" type="image" multiple class="file" data-overwrite-initial="false" data-min-file-count="1">
-                            <img src="" alt="">
-<!--                            <input type="text" id="head_pic" name="head_pic"  value="--><?//= $admin['head_pic']??'';?><!--"  placeholder="fa fa-tachometer" class="form-control col-md-7 col-xs-12" >-->
+                            <div class="col-sm-3" style="margin: 0px -10px;">
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-new thumbnail" style="height:auto">
+                                        <img src="<?= $admin['head_pic']??'/public/img/no_image.png'?>" alt="">
+                                    </div>
+                                    <div class="fileupload-preview fileupload-exists thumbnail">
+                                    </div>
+                                    <div>
+										<span class="btn btn-white btn-file" style="border-color: rgba(150,160,180,0.3)">
+											<span class="fileupload-new">
+												<i class="fa fa-paper-clip"></i> 选择头像
+											</span>
+											<span class="fileupload-exists">
+												<i class="fa fa-undo"></i> 重置
+											</span>
+											    <input type="file" class="default" name="head_pic">
+											</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 					<div class="item form-group">
@@ -59,7 +78,7 @@
 						</div>
 					</div>
                     <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">邮箱
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">邮箱
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <input type="email" id="email" name="email" value="<?= $admin['email']??'';?>" class="form-control col-md-7 col-xs-12">
@@ -75,20 +94,3 @@
 		</div>
 	</div>
 </div>
-<script>
-    $("#head_pic").fileinput({
-        uploadUrl: '#', // you must set a valid URL here else you will get an error
-        allowedFileExtensions : ['jpg', 'png','gif'],
-        overwriteInitial: false,
-        maxFileSize: 1000,
-        maxFilesNum: 10,
-        language: 'zh', //设置语言
-        browseClass: "btn btn-primary", //按钮样式
-        showPreview : true,
-        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-        slugCallback: function(filename) {
-            return filename.replace('(', '_').replace(']', '_');
-        }
-    });
-    $(".file-drop-zone-title").html("拖拽或者点击选择文件");
-</script>
