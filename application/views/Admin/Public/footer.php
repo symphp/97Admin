@@ -43,3 +43,8 @@
 <!--<script src="/public/assets/parsleyjs/dist/parsley.js"></script>-->
 <!-- Custom Theme Scripts -->
 <script src="/public/assets/build/js/custom.min.js"></script>
+<!-- validate -->
+<script src="/public/assets/jquery-validate/dist/jquery.validate.min.js"></script>
+<script src="/public/assets/jquery-validate/localization/messages_zh.js"></script>
+<!-- common -->
+<script src="/public/js/common.js?v=1"></script>

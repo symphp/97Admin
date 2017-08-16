@@ -30,13 +30,12 @@
 	<link href="/public/assets/build/css/custom.min.css" rel="stylesheet">
     <!-- icon-->
     <link rel="shortcut icon" href="/public/assets/ico/apple-touch-icon-57-precomposed.png">
-
+    <!-- common -->
+    <link rel="stylesheet" href="/public/css/common.css">
     <!-- jquery -->
     <script src="/public/assets/jquery/dist/jquery.min.js"></script>
     <!-- Switchery -->
     <script src="/public/assets/switchery/dist/switchery.js"></script>
     <!-- layer -->
     <script src="/public/assets/layer/layer.js"></script>
-    <!-- common -->
-    <script src="/public/js/common.js"></script>
 </head>

@@ -1,29 +1,11 @@
 <link rel="stylesheet" href="/public/css/bootstrap-fileupload.css">
-<script src="/public/assets/jquery-validate/dist/jquery.validate.min.js"></script>
-<script src="/public/assets/jquery-validate/localization/messages_zh.js"></script>
 <script src="/public/js/bootstrap-fileupload.js"></script>
-<script>
-    $().ready(function() {
-        var validator = $("#autoForm").validate({
-            errorPlacement: function(error, element) {
-                error.appendTo(element.parent().parent());
-            }
-        });
-        $("#reset").click(function() {
-            $(':input','#autoForm')
-                .not(':button, :submit, :reset, :hidden')
-                .val('')
-                .removeAttr('checked')
-                .removeAttr('selected');
-        });
-    });
-</script>
 <link rel="stylesheet" href="/public/css/validate.css">
 <div class="row">
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="x_panel">
 			<div class="x_content">
-				<form class="form-horizontal form-label-left" action="user" method="post" id="autoForm" enctype="multipart/form-data">
+				<form class="form-horizontal form-label-left select_from" action="user" method="post" id="autoForm" enctype="multipart/form-data">
 					<span class="section">个人资料</span>
 					<div class="item form-group">
 						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">用户名 <span class="required">*</span></label>

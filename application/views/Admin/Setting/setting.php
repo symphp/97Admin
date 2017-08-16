@@ -6,30 +6,11 @@
  * Time: 23:45
  */
 ?>
-<script src="/public/assets/jquery-validate/dist/jquery.validate.min.js"></script>
-<script src="/public/assets/jquery-validate/localization/messages_zh.js"></script>
-<script>
-    $().ready(function() {
-        var validator = $("#autoForm").validate({
-            errorPlacement: function(error, element) {
-                error.appendTo(element.parent().parent());
-            }
-        });
-        $("#reset").click(function() {
-            $(':input','#autoForm')
-                .not(':button, :submit, :reset, :hidden')
-                .val('')
-                .removeAttr('checked')
-                .removeAttr('selected');
-        });
-    });
-</script>
-<link rel="stylesheet" href="/public/css/validate.css">
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_content">
-                <form class="form-horizontal form-label-left" action="setting" method="post" id="autoForm">
+                <form class="form-horizontal form-label-left select_from" action="setting" method="post" id="autoForm">
                     <span class="section">网站设置</span>
                     <?php if($settings) :?>
                         <?php foreach ($settings as $setting) :?>

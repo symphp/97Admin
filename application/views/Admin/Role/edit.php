@@ -6,24 +6,6 @@
  * Time: 20:53
  */
 ?>
-<script src="/public/assets/jquery-validate/dist/jquery.validate.min.js"></script>
-<script src="/public/assets/jquery-validate/localization/messages_zh.js"></script>
-<script>
-    $().ready(function() {
-        var validator = $("#autoForm").validate({
-            errorPlacement: function(error, element) {
-                error.appendTo(element.parent().parent());
-            }
-        });
-        $("#reset").click(function() {
-            $(':input','#autoForm')
-                .not(':button, :submit, :reset, :hidden')
-                .val('')
-                .removeAttr('checked')
-                .removeAttr('selected');
-        });
-    });
-</script>
 <style>
     .icheckbox_flat-green{
         margin-top: -2px;
@@ -34,7 +16,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_content">
-                <form class="form-horizontal form-label-left" action="edit" method="post" id="autoForm" style="font-size: 15px;font-weight: normal">
+                <form class="form-horizontal form-label-left select_from" action="edit" method="post" id="autoForm" style="font-size: 15px;font-weight: normal">
                     <span class="section">编辑角色</span>
                     <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">角色名称 <span class="required">*</span></label>
