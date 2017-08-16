@@ -46,11 +46,11 @@ class Role extends Admin_Controller
 			$res = $this->AdminRole->addRole($data,$rolesArr);    //添加角色
 			if ($res == false) {
 				$error['msg'] = '添加角色失败';
-				$this->error($error);
+				return $this->error($error);
 			} else {
 				$success['msg'] = '添加角色成功';
 				$success['url'] = 'index';
-				$this->success($success);
+				return $this->success($success);
 			}
 		} else {
 			$res = $this->Auth->_get('*',['status'=>1],[],['sort'=>'desc','auth_id'=>'desc']);
@@ -71,16 +71,16 @@ class Role extends Admin_Controller
 		$role_id = $this->input->get('id')??0;
 		if ($role_id < 1) {
 			$error['msg'] = '参数不正确，删除失败！';
-			$this->error($error);
+			return $this->error($error);
 		}
 		$res = $this->AdminRole->delRole($role_id);
 		if ($res == false) {
 			$error['msg'] = '删除角色失败';
-			$this->error($error);
+			return $this->error($error);
 		} else {
 			$success['msg'] = '删除角色成功';
 			$success['url'] = 'index';
-			$this->success($success);
+			return $this->success($success);
 		}
 	}
 
@@ -105,11 +105,11 @@ class Role extends Admin_Controller
 			$res = $this->AdminRole->editRole($data,['role_id'=>$id],$rolesArr);    //编辑角色
 			if ($res == false) {
 				$error['msg'] = '编辑角色失败';
-				$this->error($error);
+				return $this->error($error);
 			} else {
 				$success['msg'] = '编辑角色成功';
 				$success['url'] = 'index';
-				$this->success($success);
+				return $this->success($success);
 			}
 		} else {
 			$id = $this->input->get('id')??0;
@@ -128,7 +128,7 @@ class Role extends Admin_Controller
 			$admin_role = $this->AdminRole->_getOne('*',['role_id'=>$id]);    //角色信息
 			if ($admin_role == false) {
 				$error['msg'] = '编辑角色失败';
-				$this->error($error);
+				return $this->error($error);
 			}
 			$data['admin_role']= $this->changeMsg($admin_role);
 			$this->display('Role/edit',$data);

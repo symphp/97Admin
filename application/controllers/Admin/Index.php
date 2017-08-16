@@ -37,7 +37,7 @@ class Index extends Admin_Controller
 				$upload = $this->headUpload();
 				if ($upload['success'] == false) {
 					$error['msg'] = $upload['info'];
-					$this->error($error);
+					return $this->error($error);
 				} else {
 					$params['head_pic'] = json_encode($upload['info']);
 					//删除旧的头像
@@ -53,11 +53,11 @@ class Index extends Admin_Controller
 			$res = $this->Admin->_update($params,$where);
 			if ($res == false) {
 				$error['msg'] = '更新个人资料失败';
-				$this->error($error);
+				return $this->error($error);
 			} else {
 				$success['msg'] = '更新个人资料成功！';
 				$success['url'] = 'user';
-				$this->success($success);
+				return $this->success($success);
 			}
 		} else {
 			$data['admin']  = $this->admin;
@@ -75,21 +75,10 @@ class Index extends Admin_Controller
 	 */
 	public function changePass()
 	{
-		/**
-		 * 1.输入原密码
-		 * 2.新密码确认密码
-		 * 3.匹配原密码是否正确
-		 * 4.修改新密码
-		 */
 		if (IS_POST) {
 			$old_pass = $this->input->post('old_pass');    //原密码
 			$new_pass = $this->input->post('new_pass');    //新密码
 			$confirm_pass = $this->input->post('confirm_pass');    //确认密码
-
-			if (strlen($old_pass) < 5) {
-				$error['msg'] = '原密码错误！';
-				return $this->error($error);
-			}
 
 			if ($new_pass !== $confirm_pass) {
 				$error['msg'] = '新密码和确认密码不相同！';
@@ -107,10 +96,12 @@ class Index extends Admin_Controller
 				$error['msg'] = '旧密码不正确！';
 				return $this->error($error);
 			}
-			$params['password'] = hashPass($new_pass,$admin_info['salt']);
 
+			//加密新密码
+			$params['password'] = hashPass($new_pass,$admin_info['salt']);
 			$conditions['id'] = $this->admin['id'];
 			$res = $this->Admin->_update($params,$conditions);
+
 			if ($res == false) {
 				$error['msg'] = '旧密码不正确！';
 				return $this->error($error);

@@ -35,11 +35,11 @@ class Menu extends Admin_Controller
 			$res = $this->Auth->_add($data);
 			if ($res == false) {
 				$error['msg'] = '添加菜单失败，请稍后再试！';
-				$this->error($error);
+				return $this->error($error);
 			} else {
 				$success['msg'] = '添加菜单成功！';
 				$success['url'] = 'index';
-				$this->success($success);
+				return $this->success($success);
 			}
  		} else {
 			$data['menus'] = $this->get_all_menu($this->admin['id']);    //获取树状菜单列表
@@ -69,23 +69,23 @@ class Menu extends Admin_Controller
 			}
 			if (!$auth) {
 				$error['msg'] = '参数不正确，请稍后再试！';
-				$this->error($error);
+				return $this->error($error);
 			} else {
 				$res = $this->Auth->_update($data,['auth_id'=>$auth_id]);
 				if ($res == false) {
 					$error['msg'] = '编辑失败，请稍后再试！';
-					$this->error($error);
+					return $this->error($error);
 				} else {
 					$success['msg'] = '编辑菜单成功！';
 					$success['url'] = 'index';
-					$this->success($success);
+					return $this->success($success);
 				}
 			}
 		} else {
 			$id = $this->input->get('id')??false;
 			if (!$id) {
 				$error['msg'] = '参数不正确，请稍后再试！';
-				$this->error($error);
+				return $this->error($error);
 			}
 			$data['menus'] = $this->get_all_menu($this->admin['id']);    //获取树状菜单列表
 			//判断是否是超级管理员
@@ -99,7 +99,7 @@ class Menu extends Admin_Controller
 				$this->display('/Menu/edit',$data);
 			} else {
 				$error['msg'] = '当前菜单不正确，请稍后再试！';
-				$this->error($error);
+				return $this->error($error);
 			}
 		}
 	}
@@ -117,16 +117,16 @@ class Menu extends Admin_Controller
 		}
 		if (!$auth) {
 			$error['msg'] = '参数不正确，删除失败！';
-			$this->error($error);
+			return $this->error($error);
 		} else {
 			$res = $this->Auth->_update(['status'=>'2'],['auth_id'=>$auth_id]);
 			if (!$res) {
 				$error['msg'] = '删除失败！';
-				$this->error($error);
+				return $this->error($error);
 			} else {
 				$success['msg'] = '删除成功！';
 				$success['url'] = 'index';
-				$this->success($success);
+				return $this->success($success);
 			}
 		}
 	}

@@ -26,11 +26,11 @@ class Setting extends Admin_Controller
 			$res = $this->Setting->_update_batch($arr,'key');
 			if ($res == false) {
 				$error['msg'] = '网站设置失败，请稍后再试！';
-				$this->error($error);
+				return $this->error($error);
 			} else {
 				$success['msg'] = '网站设置成功！';
 				$success['url'] = 'setting';
-				$this->success($success);
+				return $this->success($success);
 			}
 		} else {
 			$data['settings'] = $this->Setting->_get('*');

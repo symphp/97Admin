@@ -75,7 +75,7 @@ class Login extends Admin_Controller
 		$this->session->unset_userdata('token');
 		$data['msg'] = '退出成功，正在跳转首页！';
 		$data['url'] = '/Admin/Index/index';
-		$this->success($data);
+		return $this->success($data);
 	}
 
 	/**
@@ -85,7 +85,7 @@ class Login extends Admin_Controller
 	{
 		$error['msg'] = '您没有权限访问该页面！';
 		$error['url'] = '/Admin/Login/';
-		$this->error($error);
+		return $this->error($error);
 	}
 
 }
