@@ -82,32 +82,4 @@ $().ready(function() {
             },
         }
     });
-
-    $('#addUser').validate({
-        errorPlacement: function(error, element) {
-            error.appendTo(element.parent().parent());
-        },
-        rules: {
-            password: {
-                required: true,
-                minlength: 5,
-                remote: {
-                    url : "/Admin/User/checkUserExcess",
-                    type : 'post',
-                    dataType : 'json',
-                    data :{
-                        username : function () {
-                            return $('#username').val();
-                        }
-                    }
-                }
-            }
-        },
-        messages: {
-            password: {
-                required: "请输入旧密码！",
-                minlength: "您的密码必须至少有5个字符长"
-            }
-        }
-    });
 });

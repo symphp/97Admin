@@ -10,6 +10,17 @@ class Admin_model extends MY_Model
 {
 	public $_table = 'admin';
 
+	public $_msg   = array(
+		'status' => array(
+			'1' => '显示',
+			'2' => '不显示'
+		),
+		'sex' => array(
+			'1' => '男',
+			'2' => '女',
+			'3' => '保密'
+		)
+	);
 	/**
 	 * 获取账号信息
 	 * @param $username

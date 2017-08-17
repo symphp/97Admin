@@ -17,7 +17,7 @@ class User extends Admin_Controller
 	/**
 	 * 个人资料
 	 */
-	public function index()
+	public function info()
 	{
 		if (IS_POST) {
 			$params['sex']     = $this->input->post('sex');
@@ -47,7 +47,7 @@ class User extends Admin_Controller
 				return $this->error($error);
 			} else {
 				$success['msg'] = '更新个人资料成功！';
-				$success['url'] = 'user';
+				$success['url'] = 'info';
 				return $this->success($success);
 			}
 		} else {
@@ -57,7 +57,177 @@ class User extends Admin_Controller
 				array('status' => '2', 'msg' => '男'),
 				array('status' => '1', 'msg' => '女')
 			);
-			$this->display('User/index',$data);
+			$this->display('User/info',$data);
+		}
+	}
+
+	/**
+	 * 用户管理
+	 */
+	public function index()
+	{
+		$field = 'id,username,sex,phone,email,reg_time,status';
+		$condition['status'] = 1;
+		//查询出所有的用户
+		$admins = $this->Admin->_get($field,$condition);
+		if ($admins == false) {
+			$error['msg'] = '不存在用户信息！';
+			return $this->error($error);
+		} else {
+			$data['admins'] = $admins;
+		}
+		$this->display('User/index',$data);
+	}
+
+	/**
+	 * 新增用户
+	 */
+	public function add()
+	{
+		if (IS_POST) {
+			$params['sex']     = $this->input->post('sex');    //性别
+			$params['phone']   = $this->input->post('phone');    //手机
+			$params['email']   = $this->input->post('email');    //邮箱
+			$params['username']= $this->input->post('username');    //用户名
+			$params['reg_time']= time();
+			$params['salt']    = rand(000000,999999);    //盐
+			$params['password']= hashPass($this->input->post('password'),$params['salt']);
+
+			//判断会员是否已经注册
+			$res = $this->Admin->_getOne('id',['username' => $params['username']]);
+			if ($res == false) {
+				$error['msg'] = '用户名已存在！';
+				return $this->error($error);
+			}
+
+			//选择图片后上传
+			if (!empty($_FILES['head_pic']['tmp_name'])) {
+				$upload = $this->headUpload();
+				if ($upload['success'] == false) {
+					$error['msg'] = $upload['info'];
+					return $this->error($error);
+				} else {
+					$params['head_pic'] = json_encode($upload['info']);
+					//删除旧的头像
+					if ($this->admin['head_pic']) {
+						$aged_head = substr($this->admin['head_pic'],1);
+						if(file_exists($aged_head))
+							unlink($aged_head);
+					}
+				}
+			}
+			//添加会员
+			$res = $this->Admin->_add($params);
+			if ($res == false) {
+				$error['msg'] = '添加会员失败';
+				return $this->error($error);
+			} else {
+				$success['msg'] = '添加会员成功';
+				$success['url'] = '/admin/index';
+				return $this->success($success);
+			}
+		} else {
+			$data['selects'] = array(
+				array('status' => '3', 'msg' => '保密'),
+				array('status' => '2', 'msg' => '男'),
+				array('status' => '1', 'msg' => '女')
+			);
+			$this->display('User/add',$data);
+		}
+	}
+
+	/**
+	 * 编辑用户资料
+	 */
+	public function edit()
+	{
+		if (IS_POST) {
+			$id = $this->input->post('id')??'';
+
+			if ($id == '') {
+				$error['msg'] = '参数错误！';
+				return $this->error($error);
+			} else if ($id == 1 && $this->admin['id'] != 1) {
+				$error['msg'] = '管理员信息不允许修改！';
+				return $this->error($error);
+			}
+
+			$conditions['id'] = $id;
+
+			$params['sex']     = $this->input->post('sex');
+			$params['phone']   = $this->input->post('phone');
+			$params['email']   = $this->input->post('email');
+			$params['username']= $this->input->post('username');
+			//选择图片后上传
+			if (!empty($_FILES['head_pic']['tmp_name'])) {
+				$upload = $this->headUpload();
+				if ($upload['success'] == false) {
+					$error['msg'] = $upload['info'];
+					return $this->error($error);
+				} else {
+					$params['head_pic'] = json_encode($upload['info']);
+					//删除旧的头像
+					if ($this->admin['head_pic']) {
+						$aged_head = substr($this->admin['head_pic'],1);
+						if(file_exists($aged_head))
+							unlink($aged_head);
+					}
+				}
+			}
+			//更新个人资料
+			$res = $this->Admin->_update($params,$conditions);
+			if ($res == false) {
+				$error['msg'] = '更新资料失败';
+				return $this->error($error);
+			} else {
+				$success['msg'] = '更新资料成功！';
+				$success['url'] = 'index';
+				return $this->success($success);
+			}
+		} else {
+			$id = $this->input->get('id')??'';
+			if ($id == '') {
+				$error['msg'] = '参数错误！';
+			} else {
+				$admin = $this->Admin->_getOne('*',['status' => 1,'id' => $id]);
+				if (!empty($admin['head_pic'])) {
+					$admin['head_pic'] = json_decode($admin['head_pic']);
+				}
+			}
+			$data['admin'] = $admin;
+			$data['selects'] = array(
+				array('status' => '3', 'msg' => '保密'),
+				array('status' => '2', 'msg' => '女'),
+				array('status' => '1', 'msg' => '男')
+			);
+			$this->display('User/edit',$data);
+		}
+	}
+
+	/**
+	 * 删除用户(逻辑删除)
+	 */
+	public function del()
+	{
+		$id = $this->input->get('id')??'';
+		if ($id == '') {
+			$error['msg'] = '参数错误！';
+			return $this->error($error);
+		} else if ($id == 1) {
+			$error['msg'] = '管理员账号不允许删除！';
+			return $this->error($error);
+		}
+		$conditions['id'] = $id;
+		/** ---------------- 逻辑删除 ----------------**/
+		$params['status'] = 2;
+		$res = $this->Admin->_update($params,$conditions);
+		if ($res == false) {
+			$error['msg'] = '删除失败';
+			return $this->error($error);
+		} else {
+			$success['msg'] = '删除成功！';
+			$success['url'] = 'index';
+			return $this->success($success);
 		}
 	}
 
@@ -106,73 +276,6 @@ class User extends Admin_Controller
 		}
 	}
 
-	/**
-	 * 新增用户
-	 */
-	public function add()
-	{
-		if (IS_POST) {
-			$params['sex']     = $this->input->post('sex');    //性别
-			$params['phone']   = $this->input->post('phone');    //手机
-			$params['email']   = $this->input->post('email');    //邮箱
-			$params['username']= $this->input->post('username');    //用户名
-			$params['salt']    = rand(000000,999999);
-			$params['password']= hashPass($this->input->post('password'),$params['salt']);
-			//选择图片后上传
-			if (!empty($_FILES['head_pic']['tmp_name'])) {
-				$upload = $this->headUpload();
-				if ($upload['success'] == false) {
-					$error['msg'] = $upload['info'];
-					return $this->error($error);
-				} else {
-					$params['head_pic'] = json_encode($upload['info']);
-					//删除旧的头像
-					if ($this->admin['head_pic']) {
-						$aged_head = substr($this->admin['head_pic'],1);
-						if(file_exists($aged_head))
-							unlink($aged_head);
-					}
-				}
-			}
-			//添加会员
-			$res = $this->Admin->_add($params);
-			if ($res == false) {
-				$error['msg'] = '添加会员失败';
-				return $this->error($error);
-			} else {
-				$success['msg'] = '添加会员成功';
-				$success['url'] = '/admin/index';
-				return $this->success($success);
-			}
-		} else {
-			$data['selects'] = array(
-				array('status' => '3', 'msg' => '保密'),
-				array('status' => '2', 'msg' => '男'),
-				array('status' => '1', 'msg' => '女')
-			);
-			$this->display('User/add',$data);
-		}
-	}
-
-	/**
-	 * 用于前端validate验证
-	 * 检查用户是否重复
-	 * @return bool
-	 */
-	public function checkUserExcess()
-	{
-		$username = $this->input->post('username')??'';
-		if ($username == '') {
-			return false;
-		}
-		$res = $this->Admin->_getOne('id',['username' => $username]);
-
-		if ($res == false) {
-			return false;
-		} else {
-			return true;
-		}
-	}
 
 	/**
 	 * 头像上传
