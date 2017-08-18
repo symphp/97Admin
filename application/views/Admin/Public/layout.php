@@ -5,7 +5,7 @@
 <body class="nav-md">
 <div class="container body">
 	<div class="main_container">
-		<div class="col-md-3 left_col" style="margin-top: 60px;">
+		<div class="col-md-3 left_col">
 			<div class="left_col scroll-view">
 				<div class="clearfix"></div>
 				<!-- menu profile quick info -->
@@ -173,8 +173,6 @@
                 </div>
 			<?= $content??'';?>
         </div>
-
-		<!-- footer content -->
 		<footer style="background: #5b6e84;color: white">
 			<div class="text-center">
 				<?= $setting['footer']['value']??'Copyright © 2017 <a href="" target="_blank" style="color: #72d0eb;font-size: 16px;">97Admin</a> design by symphp'; ?>
