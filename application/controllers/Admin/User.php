@@ -74,7 +74,10 @@ class User extends Admin_Controller
 			$error['msg'] = '不存在用户信息！';
 			return $this->error($error);
 		} else {
-			$data['admins'] = $admins;
+			foreach ($admins as $admin) {
+				$admin['sex'] = $this->Admin->_msg['sex'][$admin['sex']];
+				$data['admins'][] = $admin;
+			}
 		}
 		$this->display('User/index',$data);
 	}
@@ -304,5 +307,5 @@ class User extends Admin_Controller
 		}
 		return $data;
 	}
-	
+
 }
