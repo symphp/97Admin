@@ -95,7 +95,7 @@ class User extends Admin_Controller
 
 			//判断会员是否已经注册
 			$res = $this->Admin->_getOne('id',['username' => $params['username']]);
-			if ($res == false) {
+			if ($res) {
 				$error['msg'] = '用户名已存在！';
 				return $this->error($error);
 			}
@@ -154,6 +154,10 @@ class User extends Admin_Controller
 
 			$conditions['id'] = $id;
 
+			/** -------------- 查询用户是否存在 ---------------- **/
+
+			$admin = $this->Admin->_getOne('id,head_pic',$conditions);
+
 			$params['sex']     = $this->input->post('sex');
 			$params['phone']   = $this->input->post('phone');
 			$params['email']   = $this->input->post('email');
@@ -167,8 +171,8 @@ class User extends Admin_Controller
 				} else {
 					$params['head_pic'] = json_encode($upload['info']);
 					//删除旧的头像
-					if ($this->admin['head_pic']) {
-						$aged_head = substr($this->admin['head_pic'],1);
+					if ($admin['head_pic']) {
+						$aged_head = substr($admin['head_pic'],1);
 						if(file_exists($aged_head))
 							unlink($aged_head);
 					}
@@ -188,6 +192,7 @@ class User extends Admin_Controller
 			$id = $this->input->get('id')??'';
 			if ($id == '') {
 				$error['msg'] = '参数错误！';
+				return $this->error($error);
 			} else {
 				$admin = $this->Admin->_getOne('*',['status' => 1,'id' => $id]);
 				if (!empty($admin['head_pic'])) {
