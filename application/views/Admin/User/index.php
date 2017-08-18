@@ -11,6 +11,7 @@
 				<th>id</th>
 				<th>用户名</th>
 				<th>性别</th>
+                <th>角色</th>
 				<th>电话</th>
 				<th>邮箱</th>
 				<th>注册时间</th>
@@ -24,6 +25,7 @@
 						<th scope="row"><?= $admin['id'];?></th>
 						<td><?= $admin['username'];?></td>
 						<td><?= $admin['sex'];?></td>
+						<td><?= $admin['role_name'];?></td>
 						<td><?= $admin['phone'];?></td>
 						<td><?= $admin['email']??'';?></td>
 						<td><?= date('Y-m-d',$admin['reg_time']);?></td>

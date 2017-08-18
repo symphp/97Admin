@@ -12,6 +12,7 @@ class User extends Admin_Controller
 	{
 		parent::__construct();
 		$this->load->model('Admin_model','Admin');
+		$this->load->model('AdminRole_model','AdminRole');
 	}
 
 	/**
@@ -66,10 +67,13 @@ class User extends Admin_Controller
 	 */
 	public function index()
 	{
-		$field = 'id,username,sex,phone,email,reg_time,status';
-		$condition['status'] = 1;
+		$field = 'id,username,sex,phone,email,reg_time,ar.role_name';
+		$condition['admin.status'] = 1;
+
+		$join['admin_role_accos as ara'] = ' on ara.admin_id = admin.id';    //角色关系表
+		$join['admin_role as ar'] = ' on ar.role_id = ara.role_id';    //角色表
 		//查询出所有的用户
-		$admins = $this->Admin->_get($field,$condition);
+		$admins = $this->Admin->_get($field,$condition,[],[],[],$join);
 		if ($admins == false) {
 			$error['msg'] = '不存在用户信息！';
 			return $this->error($error);
@@ -197,12 +201,18 @@ class User extends Admin_Controller
 				$error['msg'] = '参数错误！';
 				return $this->error($error);
 			} else {
-				$admin = $this->Admin->_getOne('*',['status' => 1,'id' => $id]);
-				if (!empty($admin['head_pic'])) {
+				/** ---------------- 获取账号信息 ----------------**/
+				$join['admin_role_accos as ara'] = ' on ara.admin_id = admin.id';    //角色关系表
+				$join['admin_role as ar'] = ' on ar.role_id = ara.role_id';    //角色表
+				$res = $this->Admin->_get('*,ar.role_id,ar.role_name',['admin.status' => 1,'admin.id' => $id],[],[],[],$join);
+				if (isset($res[0]))
+					$admin = $res[0];
+				if (!empty($admin['head_pic']))
 					$admin['head_pic'] = json_decode($admin['head_pic']);
-				}
 			}
-			$data['admin'] = $admin;
+			$data['admin_info'] = $admin;
+			/** ---------------- 获取所有角色 ----------------**/
+			$data['roles'] = $this->AdminRole->_get('role_id,role_name',['status' => 1]);
 			$data['selects'] = array(
 				array('status' => '3', 'msg' => '保密'),
 				array('status' => '2', 'msg' => '女'),

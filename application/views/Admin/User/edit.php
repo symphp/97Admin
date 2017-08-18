@@ -10,7 +10,7 @@
 					<div class="item form-group">
 						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">用户名 <span class="required">*</span></label>
 						<div class="col-md-6 col-sm-6 col-xs-12">
-							<input id="title" class="form-control col-md-7 col-xs-12" name="username" type="text" value="<?=$admin['username']??'';?>" required>
+							<input id="title" class="form-control col-md-7 col-xs-12" name="username" type="text" value="<?=$admin_info['username']??'';?>" required>
 						</div>
 					</div>
                     <div class="item form-group">
@@ -20,7 +20,7 @@
                             <div class="col-sm-3" style="margin: 0px -10px;">
                                 <div class="fileupload fileupload-new" data-provides="fileupload">
                                     <div class="fileupload-new thumbnail" style="height:auto">
-                                        <img src="<?= $admin['head_pic']??'/public/img/no_image.png'?>" alt="">
+                                        <img src="<?= $admin_info['head_pic']??'/public/img/no_image.png'?>" alt="">
                                     </div>
                                     <div class="fileupload-preview fileupload-exists thumbnail">
                                     </div>
@@ -39,6 +39,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="icon">角色</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select class="form-control valid" name="sex" aria-invalid="false">
+								<?php if(!empty($roles)) :?>
+									<?php foreach ($roles as $role) :?>
+                                        <option value="<?= $role['role_id']??'';?>" <?php if($admin_info['role_id'] == $role['role_id']) {echo 'selected="selected"';} ?> ><?= $role['role_name']??'';?></option>
+									<?php endforeach;?>
+								<?php endif;?>
+                            </select>
+                        </div>
+                    </div>
 					<div class="item form-group">
 						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="icon">性别
 						</label>
@@ -46,7 +58,7 @@
                                 <select class="form-control valid" name="sex" aria-invalid="false">
                                     <?php if(!empty($selects)) :?>
                                         <?php foreach ($selects as $select) :?>
-                                            <option value="<?= $select['status']??'';?>" <?php if($admin['sex'] == $select['status']) {echo 'selected="selected"';} ?>><?= $select['msg']??'';?></option>
+                                            <option value="<?= $select['status']??'';?>" <?php if($admin_info['sex'] == $select['status']) {echo 'selected="selected"';} ?>><?= $select['msg']??'';?></option>
 										<?php endforeach;?>
 									<?php endif;?>
                                 </select>
@@ -56,14 +68,14 @@
 						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">手机
 						</label>
 						<div class="col-md-6 col-sm-6 col-xs-12">
-							<input type="number" id="phone" name="phone" value="<?= $admin['phone']??'';?>" class="form-control col-md-7 col-xs-12">
+							<input type="number" id="phone" name="phone" value="<?= $admin_info_info['phone']??'';?>" class="form-control col-md-7 col-xs-12">
 						</div>
 					</div>
                     <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">邮箱
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="email" id="email" name="email" value="<?= $admin['email']??'';?>" class="form-control col-md-7 col-xs-12">
+                            <input type="email" id="email" name="email" value="<?= $admin_info_info['email']??'';?>" class="form-control col-md-7 col-xs-12">
                         </div>
                     </div>
 					<div class="item form-group">
