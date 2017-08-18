@@ -304,4 +304,5 @@ class User extends Admin_Controller
 		}
 		return $data;
 	}
+	
 }
