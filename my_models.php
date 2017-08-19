@@ -11,19 +11,12 @@
  * ---------------------- Models to Load ----------------------
  * <examples>    类名    $this里定义的别名
  *
- * @property membership_model $membership_model
- * @property site_model       $site_model
- * @property data_model       $data_model
- * @property products_model   $products_model
- * @property film_model       $film_model
- * @property film_model1      $film_model1
- *
  * @property Admin_model    $Admin
  * @property AdminLog_model $AdminLog
  * @property Auth_model $Auth
  * @property Setting_model $Setting
  * @property AdminRole_model $AdminRole
- * @property AuthRoleAccos_model $AuthRoleAccos
+ * @property AdminRoleAccos_model $AdminRoleAccos
  *
  */
 class my_models

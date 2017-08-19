@@ -46,6 +46,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="icon">角色</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select class="form-control valid" name="role_id" aria-invalid="false">
+								<?php if(!empty($roles)) :?>
+									<?php foreach ($roles as $role) :?>
+                                        <option value="<?= $role['role_id']??'';?>" ><?= $role['role_name']??'';?></option>
+									<?php endforeach;?>
+								<?php endif;?>
+                            </select>
+                        </div>
+                    </div>
 					<div class="item form-group">
 						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="icon">性别
 						</label>

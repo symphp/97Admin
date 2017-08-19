@@ -13,6 +13,7 @@ class User extends Admin_Controller
 		parent::__construct();
 		$this->load->model('Admin_model','Admin');
 		$this->load->model('AdminRole_model','AdminRole');
+		$this->load->model('AdminRoleAccos_model','AdminRoleAccos');
 	}
 
 	/**
@@ -96,10 +97,16 @@ class User extends Admin_Controller
 			$params['phone']   = $this->input->post('phone');    //手机
 			$params['email']   = $this->input->post('email');    //邮箱
 			$params['username']= $this->input->post('username');    //用户名
-			$params['reg_time']= time();
+			$params['reg_time']= time();   //注册时间
 			$params['salt']    = rand(000000,999999);    //盐
-			$params['password']= hashPass($this->input->post('password'),$params['salt']);
+			$params['password']= hashPass($this->input->post('password'),$params['salt']);   //密码
 
+			$role_id = $this->input->post('role_id')??'';    //角色id
+
+			if ($role_id == '') {
+				$error['msg'] = '未选择角色！';
+				return $this->error($error);
+			}
 			//判断会员是否已经注册
 			$res = $this->Admin->_getOne('id',['username' => $params['username']]);
 			if ($res) {
@@ -123,22 +130,30 @@ class User extends Admin_Controller
 					}
 				}
 			}
-			//添加会员
-			$res = $this->Admin->_add($params);
-			if ($res == false) {
+
+			/** ---------------- 添加会员表以及角色关系表 ----------------**/
+			$this->db->trans_begin();
+
+			$id = $this->Admin->_add($params,'id');
+			$this->AdminRoleAccos->_add(['admin_id' => $id,'role_id' => $role_id]);
+
+			if ($this->db->trans_status() === FALSE) {
+				$this->db->trans_rollback();
 				$error['msg'] = '添加会员失败';
 				return $this->error($error);
 			} else {
+				$this->db->trans_commit();
 				$success['msg'] = '添加会员成功';
-				$success['url'] = '/admin/index';
+				$success['url'] = '/Admin/User/index';
 				return $this->success($success);
 			}
 		} else {
 			$data['selects'] = array(
 				array('status' => '3', 'msg' => '保密'),
-				array('status' => '2', 'msg' => '男'),
-				array('status' => '1', 'msg' => '女')
+				array('status' => '2', 'msg' => '女'),
+				array('status' => '1', 'msg' => '男')
 			);
+			$data['roles'] = $this->AdminRole->_get('role_id,role_name',['status' => 1]);
 			$this->display('User/add',$data);
 		}
 	}
@@ -163,7 +178,9 @@ class User extends Admin_Controller
 
 			/** -------------- 查询用户是否存在 ---------------- **/
 
-			$admin = $this->Admin->_getOne('id,head_pic',$conditions);
+			$join['admin_role_accos as ara'] = ' on ara.admin_id = admin.id';    //角色关系表
+			$join['admin_role as ar'] = ' on ar.role_id = ara.role_id';    //角色表
+			$admin = $this->Admin->_get('id,head_pic',$conditions,[],[],[],$join);
 
 			$params['sex']     = $this->input->post('sex');
 			$params['phone']   = $this->input->post('phone');
@@ -185,12 +202,21 @@ class User extends Admin_Controller
 					}
 				}
 			}
-			//更新个人资料
+			$this->db->trans_begin();
+			/** ---------------- 更新admin表 ----------------**/
 			$res = $this->Admin->_update($params,$conditions);
-			if ($res == false) {
+			/** ---------------- 更新角色关系表 ----------------**/
+			$current_role_id = $this->input->post('current_role_id');    //当前的角色id
+			$role_id = $this->input->post('role_id');    //新角色id
+			if ($current_role_id != $role_id) {
+				$this->AdminRoleAccos->_update(['role_id' => $role_id],['admin_id' => $id]);
+			}
+			if ($this->db->trans_status() === FALSE) {
+				$this->db->trans_rollback();
 				$error['msg'] = '更新资料失败';
 				return $this->error($error);
 			} else {
+				$this->db->trans_commit();
 				$success['msg'] = '更新资料成功！';
 				$success['url'] = 'index';
 				return $this->success($success);

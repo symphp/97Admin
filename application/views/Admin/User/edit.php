@@ -42,7 +42,7 @@
                     <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="icon">角色</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <select class="form-control valid" name="sex" aria-invalid="false">
+                            <select class="form-control valid" name="role_id" aria-invalid="false">
 								<?php if(!empty($roles)) :?>
 									<?php foreach ($roles as $role) :?>
                                         <option value="<?= $role['role_id']??'';?>" <?php if($admin_info['role_id'] == $role['role_id']) {echo 'selected="selected"';} ?> ><?= $role['role_name']??'';?></option>
@@ -81,6 +81,7 @@
 					<div class="item form-group">
 						<div class="col-md-6 col-md-offset-3">
                             <input type="hidden" name="id" value="<?= $_GET['id']??''?>" />
+                            <input type="hidden" name="current_role_id" value="<?= $admin_info['role_id']?>" />
 							<button id="send" type='submit' class="btn btn-success">提交</button>
 						</div>
 					</div>
