@@ -32,6 +32,10 @@ class Admin_Controller extends CI_Controller {
 	protected $current = [];    //当前操作
 	protected $setting = [];    //系统设置
 
+	protected $page = 1;
+	protected $pageSize = 10;
+	protected $configPage = [];//分页样式配置
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -82,6 +86,9 @@ class Admin_Controller extends CI_Controller {
 
 		$this->menu = $this->get_menu_tree($admin_auth_arr);    //获取菜单列表
 		$this->setting = $this->Setting->getAll();    //获取系统设置
+
+		/** ---------------- 分页样式 ----------------**/
+		$this->pageStyle();
 	}
 
 	/**
@@ -162,6 +169,40 @@ class Admin_Controller extends CI_Controller {
 			}
 		}
 		return $tree;
+	}
+
+	protected function pageStyle()
+	{
+		$this->configPage['uri_segment'] = 3;
+		$this->configPage['num_links'] = 10;
+		$this->configPage['use_page_numbers'] = TRUE;
+		$this->configPage['page_query_string'] = true;
+		$this->configPage['query_string_segment'] = 'page';
+		$this->configPage['reuse_query_string'] = true;
+		$this->configPage['full_tag_open'] = '<div><ul class="pagination" style="margin:0">';
+		$this->configPage['full_tag_close'] = '</ul></div>';
+
+		$this->configPage['first_link'] = '<<';
+		$this->configPage['first_tag_open'] = '<li>';
+		$this->configPage['first_tag_close'] = '</li>';
+		$this->configPage['first_url'] = '?page=1';
+		//$this->configPage['first_url'] = ''; //自动生成请求条件
+
+		$this->configPage['last_tag_open'] = '<li >';
+		$this->configPage['last_tag_close'] = '</li>';
+		$this->configPage['last_link'] = '末页';
+		$this->configPage['next_link'] = '>>';
+		$this->configPage['next_tag_open'] = '<li class="disabled">';
+		$this->configPage['next_tag_close'] = '</li>';
+		$this->configPage['next_tag_open'] = '<li>';
+		$this->configPage['next_tag_close'] = '</li>';
+		$this->configPage['prev_link'] = '<<';
+		$this->configPage['prev_tag_open'] = '<li>';
+		$this->configPage['prev_tag_close'] = '</li>';
+		$this->configPage['cur_tag_open'] = '<li class="active"><a href="#">';
+		$this->configPage['cur_tag_close'] = '</a></li>';
+		$this->configPage['num_tag_open'] = '<li>';
+		$this->configPage['num_tag_close'] = '</li>';
 	}
 
 }

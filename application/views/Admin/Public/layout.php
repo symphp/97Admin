@@ -11,7 +11,7 @@
 				<!-- menu profile quick info -->
 				<div class="profile clearfix">
 					<div class="profile_pic">
-						<img src="/public/img/touxiang.jpg" alt="..." class="img-circle profile_img">
+						<img src="<?= $admin['head_pic'] ?>" alt="..." class="img-circle profile_img">
 					</div>
 					<div class="profile_info">
 						<span>Welcome,</span>

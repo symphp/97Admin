@@ -259,4 +259,16 @@ class MY_Model extends CI_Model
 	{
 		return $this->db->update_batch($this->_table,$data,$key);
 	}
+
+	/**
+	 *
+	 * 获取统计数量
+	 * @param string|array $where where条件 数组格式
+	 * @param string|array $like 搜索 数组格式
+	 * @return bool|int
+	 */
+	public function _count($where='',$like='',$select="*",$join='',$left='')
+	{
+		return $this->_get("count({$select}) as count",$where,$like,'','',$join,$left)[0]['count'];
+	}
 }

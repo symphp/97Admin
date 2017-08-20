@@ -31,7 +31,7 @@
     <!-- icon-->
     <link rel="shortcut icon" href="/public/assets/ico/apple-touch-icon-57-precomposed.png">
     <!-- common -->
-    <link rel="stylesheet" href="/public/css/common.css">
+    <link rel="stylesheet" href="/public/css/common.css?v=1">
     <!-- jquery -->
     <script src="/public/assets/jquery/dist/jquery.min.js"></script>
     <!-- Switchery -->

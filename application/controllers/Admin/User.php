@@ -195,7 +195,7 @@ class User extends Admin_Controller
 				} else {
 					$params['head_pic'] = json_encode($upload['info']);
 					//删除旧的头像
-					if ($admin['head_pic']) {
+					if (isset($admin['head_pic'])) {
 						$aged_head = substr($admin['head_pic'],1);
 						if(file_exists($aged_head))
 							unlink($aged_head);
