@@ -76,7 +76,7 @@ class Admin_model extends MY_Model
 		if($res == false) {
 			return false;
 		} else {
-			if ($res[0]['role_id'] = 1) {
+			if ($res[0]['role_id'] != 1) {
 				return false;
 			} else {
 				return true;
