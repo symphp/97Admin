@@ -5,7 +5,6 @@
  * Date: 2017/8/17
  * Time: 16:16
  */
-
 class User extends Admin_Controller
 {
 	public function __construct()

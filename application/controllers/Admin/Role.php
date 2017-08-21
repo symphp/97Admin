@@ -5,7 +5,6 @@
  * Date: 2017/8/2
  * Time: 15:57
  */
-
 class Role extends Admin_Controller
 {
 	public function __construct()

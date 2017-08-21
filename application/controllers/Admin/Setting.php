@@ -5,7 +5,6 @@
  * Date: 2017/7/27
  * Time: 17:21
  */
-
 class Setting extends Admin_Controller
 {
 	public function __construct()
