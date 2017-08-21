@@ -1,6 +1,5 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<!-- Meta, title, CSS, favicons, etc. -->
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,20 +9,11 @@
         <?= $setting['title']['value']??'';?>
     </title>
 	<!-- Bootstrap -->
-	<link href="/public/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/public/assets/bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet">
 	<!-- Font Awesome -->
 	<link href="/public/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-	<!-- NProgress -->
-	<link href="/public/assets/nprogress/nprogress.css" rel="stylesheet">
 	<!-- iCheck -->
 	<link href="/public/assets/iCheck/skins/flat/green.css" rel="stylesheet">
-
-	<!-- bootstrap-progressbar -->
-	<link href="/public/assets/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-	<!-- JQVMap -->
-	<link href="/public/assets/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
-	<!-- bootstrap-daterangepicker -->
-	<link href="/public/assets/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
     <!-- switchery -->
     <link href="/public/assets/switchery/dist/switchery.css" rel="stylesheet">
 	<!-- Custom Theme Style -->
@@ -34,8 +24,4 @@
     <link rel="stylesheet" href="/public/css/common.css?v=1">
     <!-- jquery -->
     <script src="/public/assets/jquery/dist/jquery.min.js"></script>
-    <!-- Switchery -->
-    <script src="/public/assets/switchery/dist/switchery.js"></script>
-    <!-- layer -->
-    <script src="/public/assets/layer/layer.js"></script>
 </head>
