@@ -7,8 +7,6 @@
 <script src="/public/assets/layer/layer.js"></script>
 <!-- Bootstrap -->
 <script src="/public/assets/bootstrap-3.3.7/js/bootstrap.js"></script>
-<!-- DateJS -->
-<script src="/public/assets/DateJS/build/date.js"></script>
 <!-- iCheck -->
 <script src="/public/assets/iCheck/icheck.min.js"></script>
 <!-- Custom Theme Scripts -->
