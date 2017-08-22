@@ -44,9 +44,12 @@ class Admin_Controller extends CI_Controller {
 
 		/** -------------- 验证用户是否登录，获取登录用户信息 ---------------- **/
 		$token = $this->session->userdata('token');
-		if($this->router->fetch_class() == 'Login') {
+
+		//如果是登录，显示登录页面
+		if (ucfirst($this->router->fetch_class()) == 'Login') {
 			return false;
 		}
+
 		if($token) {
 			$admin  = $this->Admin->_getOne('id,username,head_pic,sex,phone,email',['token'=>$token,'status'=>1]);
 			if($admin) {
@@ -55,8 +58,9 @@ class Admin_Controller extends CI_Controller {
 				$this->admin = $admin;    //保存用户信息
 			}
 		}
-		if($flag == false){
-			header("Location: /Admin/Login/");
+
+		if($flag == false) {
+			header("Location: /Admin/Login");
 			exit();
 		}
 
@@ -65,17 +69,17 @@ class Admin_Controller extends CI_Controller {
 
 		$auth_name = ucfirst($this->router->fetch_class().'/'.$this->router->fetch_method());    //当前操作与方法
 
+		//如果是超级管理员不用验证操作权限
 		if($superAdmin) {
 			$checkAuthName = $this->Auth->_get('auth_id',['auth.name'=>$auth_name]);
 		} else {
 			$checkAuthName = $this->Admin->getAdminAuth($this->admin['id'],['auth.name'=>$auth_name]);    //判断当前操作是否有权限
 		}
-
 		if($checkAuthName == false) {
 			header("Location: /Admin/Login/authError");
 			exit();
 		} else {
-			$this->current = $this->Auth->get_current_auth($checkAuthName[0]['auth_id']);    //获取当前操作方法
+			$this->current = $this->Auth->get_current_auth($checkAuthName[0]['auth_id'])??'';    //获取当前操作方法
 		}
 
 		if($superAdmin) {

@@ -30,9 +30,9 @@ class Index extends Admin_Controller
 			$conditions['admin_id'] = $this->admin['id'];
 		}
 
-		$data['logs']  = $this->AdminLog->_get('*',$conditions,[],[],['page' => $page, 'count' => $pageSize]);
-		$data['count'] = $this->AdminLog->_count($conditions);
-
+		$join['admin as a'] = ' on a.id = admin_log.admin_id';
+		$data['logs']  = $this->AdminLog->_get('admin_log.*,a.username',$conditions,[],['time' => 'desc'],['page' => $page, 'count' => $pageSize],$join);
+		$data['count'] = $this->AdminLog->_count($conditions,[],'admin_log.id',$join,'left');
 		//继承分页样式
 		$configPage = $this->configPage;
 		$configPage['total_rows'] = $data['count'];

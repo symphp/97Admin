@@ -14,6 +14,9 @@ class Login extends Admin_Controller
 		$this->load->model('Admin_model','Admin');
 	}
 
+	/**
+	 * 登录页面
+	 */
 	public function index()
 	{
 		$this->load->view('login');
@@ -73,7 +76,7 @@ class Login extends Admin_Controller
 	{
 		$this->session->unset_userdata('token');
 		$data['msg'] = '退出成功，正在跳转首页！';
-		$data['url'] = '/Admin/Index/index';
+		$data['url'] = '/index.php';
 		return $this->success($data);
 	}
 

@@ -28,7 +28,7 @@ class Role extends Admin_Controller
 	/**
 	 * 添加角色
 	 */
-	public function add()
+		public function add()
 	{
 		if (IS_POST) {
 			$data['role_name'] = trim($this->input->post('role_name'));    //角色名称

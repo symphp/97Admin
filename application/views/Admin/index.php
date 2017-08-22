@@ -13,7 +13,7 @@
         </div>
         <div class="panel-body" style="display: block;">
             <h4>97Admin</h4>
-            <p>97admin后台管理系统是基于Codeigniter框架和Olive Admin后台模版进行开发！</p>
+            <p>97admin后台管理系统是基于Codeigniter框架和Gentelella后台模版进行开发！</p>
             <p>php版本：<?= PHP_VERSION;?></p>
             <p>服务器：<?= php_uname('s');?></p>
             <p>PHP运行方式：<?= php_sapi_name();?></p>
@@ -74,7 +74,7 @@
 				<?php foreach ($logs as $log) :?>
                     <tr>
                         <th scope="row"><?= $log['id'];?></th>
-                        <td><?= $log['admin_id'];?></td>
+                        <td><?= $log['username']??'';?></td>
                         <td><?= $log['time'];?></td>
                         <td><?= $log['ip'];?></td>
                         <td><?= $log['log'];?></td>
