@@ -63,7 +63,7 @@
                                 <img src="/Admin/Login/verifyCode" style="position: absolute;cursor: pointer;" onclick=this.src="/Admin/Login/verifyCode/"+Math.random() title='看不清？点击更换验证码'>
                             </div>
                             <div class="form-group col-xs-6" style="padding-left:0px;">
-                                <label for="form-checkbox" style="margin-top: -10px;font-weight: normal;">Remember me</label>
+                                <label for="form-checkbox" style="font-weight: normal;position: absolute;margin-left: 15px;margin-top: -5px;">Remember me</label>
                                 <input type="checkbox" id="form-checkbox" name="remember" style="float: left" >
                             </div>
                             <button type="button" class="btn" onclick="verify()">Sign in!</button>

@@ -13,10 +13,12 @@
     <link rel="stylesheet" href="/public/css/style.css">
     <link rel="stylesheet" href="/public/assets/fancybox/jquery.fancybox.min.css">
     <link rel="stylesheet" href="/public/css/gallery.css">
+    <link rel="stylesheet" href="/public/css/jquery.fancybox.css">
     <!-- JS -->
     <script src="/public/assets/jquery/dist/jquery.min.js"></script>
-    <script src="/public/assets/fancybox/jquery.fancybox.min.js"></script>
-    <script src="/public/js/modernizr.custom.js"></script>
+<!--    <script src="/public/assets/fancybox/jquery.fancybox.min.js"></script>-->
+    <script src="/public/js/jquery.fancybox.js"></script>
+    <script src="/public/js/modernizr.custom.js?v=1"></script>
     <style>
         .cleBorder {
             border:10px solid rgba(255,255,255,0.3);
@@ -34,7 +36,7 @@
             <!-- BEGIN ROW  -->
             <div class="row">
                 <div class="profile-nav">
-                    <section class="panel">
+                    <section class="panel" style="border: 0px;">
                         <div class="user-heading round" style="background: #207a94;color: white;">
                             <a href="/Admin/Login" class="cleBorder" target="_blank">
                                 <img src="/public/img/logo_150.png" alt="97Admin">
@@ -129,7 +131,7 @@
 </body>
 </html>
 <script type="text/javascript">
-    $(function () {
-        $("[data-fancybox-group]").fancybox();
-    })
+    $(function() {
+        jQuery(".fancybox").fancybox();
+    });
 </script>
