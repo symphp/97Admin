@@ -47,7 +47,7 @@
                                 1.97admin.sql文件导入到数据库中。
                                 <br> 2.修改文件App/config/database.php。
                                 <br> 3.填写正确的数据库配置信息。
-                                <br> 4.帐号：admin，密码：admin。
+                                <br> 4.帐号：admin，密码：admin888。
                             </p>
                             <h4>后台地址：<a href="/Admin/Login" class="cleBorder" style="padding: 5px;">进入97Admin后台管理系统</a></h4>
                         </div>
